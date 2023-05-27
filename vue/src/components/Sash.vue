@@ -79,7 +79,7 @@ const send = (event: MouseEvent) => {
     emit('attribute_change', res)
 }
 
-const th_send = throttle(send, 80)
+const th_send = throttle(send, 10)
 
 const mousemove = (event: MouseEvent) => {
     th_send(event)

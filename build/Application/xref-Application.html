@@ -15,7 +15,7 @@
 
 <div class="node">
   <a name="main.py"></a>
-  <a target="code" href="///C:/Users/abc15/Desktop/Universal%20Translation/main.py" type="text/plain"><tt>main.py</tt></a>
+  <a target="code" href="///C:/Users/abc15/Desktop/Universal%20Translator/main.py" type="text/plain"><tt>main.py</tt></a>
 <span class="moduletype">Script</span>  <div class="import">
 imports:
     <a href="#_collections_abc">_collections_abc</a>
@@ -157,6 +157,7 @@ imports:
  &#8226;   <a href="#linecache">linecache</a>
  &#8226;   <a href="#locale">locale</a>
  &#8226;   <a href="#loguru">loguru</a>
+ &#8226;   <a href="#module.OShelper">module.OShelper</a>
  &#8226;   <a href="#module.network">module.network</a>
  &#8226;   <a href="#ntpath">ntpath</a>
  &#8226;   <a href="#operator">operator</a>
@@ -4306,6 +4307,950 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="chardet"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/__init__.py" type="text/plain"><tt>chardet</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#chardet.charsetgroupprober">chardet.charsetgroupprober</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#chardet.resultdict">chardet.resultdict</a>
+ &#8226;   <a href="#chardet.universaldetector">chardet.universaldetector</a>
+ &#8226;   <a href="#chardet.version">chardet.version</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.big5freq">chardet.big5freq</a>
+ &#8226;   <a href="#chardet.big5prober">chardet.big5prober</a>
+ &#8226;   <a href="#chardet.chardistribution">chardet.chardistribution</a>
+ &#8226;   <a href="#chardet.charsetgroupprober">chardet.charsetgroupprober</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.codingstatemachinedict">chardet.codingstatemachinedict</a>
+ &#8226;   <a href="#chardet.cp949prober">chardet.cp949prober</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#chardet.escprober">chardet.escprober</a>
+ &#8226;   <a href="#chardet.escsm">chardet.escsm</a>
+ &#8226;   <a href="#chardet.eucjpprober">chardet.eucjpprober</a>
+ &#8226;   <a href="#chardet.euckrfreq">chardet.euckrfreq</a>
+ &#8226;   <a href="#chardet.euckrprober">chardet.euckrprober</a>
+ &#8226;   <a href="#chardet.euctwfreq">chardet.euctwfreq</a>
+ &#8226;   <a href="#chardet.euctwprober">chardet.euctwprober</a>
+ &#8226;   <a href="#chardet.gb2312freq">chardet.gb2312freq</a>
+ &#8226;   <a href="#chardet.gb2312prober">chardet.gb2312prober</a>
+ &#8226;   <a href="#chardet.hebrewprober">chardet.hebrewprober</a>
+ &#8226;   <a href="#chardet.jisfreq">chardet.jisfreq</a>
+ &#8226;   <a href="#chardet.johabfreq">chardet.johabfreq</a>
+ &#8226;   <a href="#chardet.johabprober">chardet.johabprober</a>
+ &#8226;   <a href="#chardet.jpcntx">chardet.jpcntx</a>
+ &#8226;   <a href="#chardet.langbulgarianmodel">chardet.langbulgarianmodel</a>
+ &#8226;   <a href="#chardet.langgreekmodel">chardet.langgreekmodel</a>
+ &#8226;   <a href="#chardet.langhebrewmodel">chardet.langhebrewmodel</a>
+ &#8226;   <a href="#chardet.langrussianmodel">chardet.langrussianmodel</a>
+ &#8226;   <a href="#chardet.langthaimodel">chardet.langthaimodel</a>
+ &#8226;   <a href="#chardet.langturkishmodel">chardet.langturkishmodel</a>
+ &#8226;   <a href="#chardet.latin1prober">chardet.latin1prober</a>
+ &#8226;   <a href="#chardet.macromanprober">chardet.macromanprober</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+ &#8226;   <a href="#chardet.mbcssm">chardet.mbcssm</a>
+ &#8226;   <a href="#chardet.resultdict">chardet.resultdict</a>
+ &#8226;   <a href="#chardet.sbcharsetprober">chardet.sbcharsetprober</a>
+ &#8226;   <a href="#chardet.sbcsgroupprober">chardet.sbcsgroupprober</a>
+ &#8226;   <a href="#chardet.sjisprober">chardet.sjisprober</a>
+ &#8226;   <a href="#chardet.universaldetector">chardet.universaldetector</a>
+ &#8226;   <a href="#chardet.utf1632prober">chardet.utf1632prober</a>
+ &#8226;   <a href="#chardet.utf8prober">chardet.utf8prober</a>
+ &#8226;   <a href="#chardet.version">chardet.version</a>
+ &#8226;   <a href="#module.OShelper">module.OShelper</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.big5freq"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/big5freq.py" type="text/plain"><tt>chardet.big5freq</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.chardistribution">chardet.chardistribution</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.big5prober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/big5prober.py" type="text/plain"><tt>chardet.big5prober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.chardistribution">chardet.chardistribution</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.mbcssm">chardet.mbcssm</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.chardistribution"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/chardistribution.py" type="text/plain"><tt>chardet.chardistribution</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.big5freq">chardet.big5freq</a>
+ &#8226;   <a href="#chardet.euckrfreq">chardet.euckrfreq</a>
+ &#8226;   <a href="#chardet.euctwfreq">chardet.euctwfreq</a>
+ &#8226;   <a href="#chardet.gb2312freq">chardet.gb2312freq</a>
+ &#8226;   <a href="#chardet.jisfreq">chardet.jisfreq</a>
+ &#8226;   <a href="#chardet.johabfreq">chardet.johabfreq</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.big5prober">chardet.big5prober</a>
+ &#8226;   <a href="#chardet.cp949prober">chardet.cp949prober</a>
+ &#8226;   <a href="#chardet.eucjpprober">chardet.eucjpprober</a>
+ &#8226;   <a href="#chardet.euckrprober">chardet.euckrprober</a>
+ &#8226;   <a href="#chardet.euctwprober">chardet.euctwprober</a>
+ &#8226;   <a href="#chardet.gb2312prober">chardet.gb2312prober</a>
+ &#8226;   <a href="#chardet.johabprober">chardet.johabprober</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.sjisprober">chardet.sjisprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.charsetgroupprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/charsetgroupprober.py" type="text/plain"><tt>chardet.charsetgroupprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+ &#8226;   <a href="#chardet.sbcsgroupprober">chardet.sbcsgroupprober</a>
+ &#8226;   <a href="#chardet.universaldetector">chardet.universaldetector</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.charsetprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/charsetprober.py" type="text/plain"><tt>chardet.charsetprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#logging">logging</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.charsetgroupprober">chardet.charsetgroupprober</a>
+ &#8226;   <a href="#chardet.escprober">chardet.escprober</a>
+ &#8226;   <a href="#chardet.hebrewprober">chardet.hebrewprober</a>
+ &#8226;   <a href="#chardet.latin1prober">chardet.latin1prober</a>
+ &#8226;   <a href="#chardet.macromanprober">chardet.macromanprober</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.sbcharsetprober">chardet.sbcharsetprober</a>
+ &#8226;   <a href="#chardet.universaldetector">chardet.universaldetector</a>
+ &#8226;   <a href="#chardet.utf1632prober">chardet.utf1632prober</a>
+ &#8226;   <a href="#chardet.utf8prober">chardet.utf8prober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.codingstatemachine"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/codingstatemachine.py" type="text/plain"><tt>chardet.codingstatemachine</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.codingstatemachinedict">chardet.codingstatemachinedict</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#logging">logging</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.big5prober">chardet.big5prober</a>
+ &#8226;   <a href="#chardet.cp949prober">chardet.cp949prober</a>
+ &#8226;   <a href="#chardet.escprober">chardet.escprober</a>
+ &#8226;   <a href="#chardet.eucjpprober">chardet.eucjpprober</a>
+ &#8226;   <a href="#chardet.euckrprober">chardet.euckrprober</a>
+ &#8226;   <a href="#chardet.euctwprober">chardet.euctwprober</a>
+ &#8226;   <a href="#chardet.gb2312prober">chardet.gb2312prober</a>
+ &#8226;   <a href="#chardet.johabprober">chardet.johabprober</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.sjisprober">chardet.sjisprober</a>
+ &#8226;   <a href="#chardet.utf8prober">chardet.utf8prober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.codingstatemachinedict"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/codingstatemachinedict.py" type="text/plain"><tt>chardet.codingstatemachinedict</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.escsm">chardet.escsm</a>
+ &#8226;   <a href="#chardet.mbcssm">chardet.mbcssm</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.cp949prober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/cp949prober.py" type="text/plain"><tt>chardet.cp949prober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.chardistribution">chardet.chardistribution</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.mbcssm">chardet.mbcssm</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.enums"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/enums.py" type="text/plain"><tt>chardet.enums</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#enum">enum</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.charsetgroupprober">chardet.charsetgroupprober</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.escprober">chardet.escprober</a>
+ &#8226;   <a href="#chardet.escsm">chardet.escsm</a>
+ &#8226;   <a href="#chardet.eucjpprober">chardet.eucjpprober</a>
+ &#8226;   <a href="#chardet.hebrewprober">chardet.hebrewprober</a>
+ &#8226;   <a href="#chardet.latin1prober">chardet.latin1prober</a>
+ &#8226;   <a href="#chardet.macromanprober">chardet.macromanprober</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+ &#8226;   <a href="#chardet.mbcssm">chardet.mbcssm</a>
+ &#8226;   <a href="#chardet.sbcharsetprober">chardet.sbcharsetprober</a>
+ &#8226;   <a href="#chardet.sjisprober">chardet.sjisprober</a>
+ &#8226;   <a href="#chardet.universaldetector">chardet.universaldetector</a>
+ &#8226;   <a href="#chardet.utf1632prober">chardet.utf1632prober</a>
+ &#8226;   <a href="#chardet.utf8prober">chardet.utf8prober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.escprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/escprober.py" type="text/plain"><tt>chardet.escprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#chardet.escsm">chardet.escsm</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.universaldetector">chardet.universaldetector</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.escsm"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/escsm.py" type="text/plain"><tt>chardet.escsm</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.codingstatemachinedict">chardet.codingstatemachinedict</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.escprober">chardet.escprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.eucjpprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/eucjpprober.py" type="text/plain"><tt>chardet.eucjpprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.chardistribution">chardet.chardistribution</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#chardet.jpcntx">chardet.jpcntx</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.mbcssm">chardet.mbcssm</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.euckrfreq"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/euckrfreq.py" type="text/plain"><tt>chardet.euckrfreq</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.chardistribution">chardet.chardistribution</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.euckrprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/euckrprober.py" type="text/plain"><tt>chardet.euckrprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.chardistribution">chardet.chardistribution</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.mbcssm">chardet.mbcssm</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.euctwfreq"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/euctwfreq.py" type="text/plain"><tt>chardet.euctwfreq</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.chardistribution">chardet.chardistribution</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.euctwprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/euctwprober.py" type="text/plain"><tt>chardet.euctwprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.chardistribution">chardet.chardistribution</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.mbcssm">chardet.mbcssm</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.gb2312freq"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/gb2312freq.py" type="text/plain"><tt>chardet.gb2312freq</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.chardistribution">chardet.chardistribution</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.gb2312prober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/gb2312prober.py" type="text/plain"><tt>chardet.gb2312prober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.chardistribution">chardet.chardistribution</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.mbcssm">chardet.mbcssm</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.hebrewprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/hebrewprober.py" type="text/plain"><tt>chardet.hebrewprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#chardet.sbcharsetprober">chardet.sbcharsetprober</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.sbcsgroupprober">chardet.sbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.jisfreq"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/jisfreq.py" type="text/plain"><tt>chardet.jisfreq</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.chardistribution">chardet.chardistribution</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.johabfreq"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/johabfreq.py" type="text/plain"><tt>chardet.johabfreq</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.chardistribution">chardet.chardistribution</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.johabprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/johabprober.py" type="text/plain"><tt>chardet.johabprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.chardistribution">chardet.chardistribution</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.mbcssm">chardet.mbcssm</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.jpcntx"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/jpcntx.py" type="text/plain"><tt>chardet.jpcntx</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.eucjpprober">chardet.eucjpprober</a>
+ &#8226;   <a href="#chardet.sjisprober">chardet.sjisprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.langbulgarianmodel"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/langbulgarianmodel.py" type="text/plain"><tt>chardet.langbulgarianmodel</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.sbcharsetprober">chardet.sbcharsetprober</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.sbcsgroupprober">chardet.sbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.langgreekmodel"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/langgreekmodel.py" type="text/plain"><tt>chardet.langgreekmodel</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.sbcharsetprober">chardet.sbcharsetprober</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.sbcsgroupprober">chardet.sbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.langhebrewmodel"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/langhebrewmodel.py" type="text/plain"><tt>chardet.langhebrewmodel</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.sbcharsetprober">chardet.sbcharsetprober</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.sbcsgroupprober">chardet.sbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.langrussianmodel"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/langrussianmodel.py" type="text/plain"><tt>chardet.langrussianmodel</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.sbcharsetprober">chardet.sbcharsetprober</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.sbcsgroupprober">chardet.sbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.langthaimodel"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/langthaimodel.py" type="text/plain"><tt>chardet.langthaimodel</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.sbcharsetprober">chardet.sbcharsetprober</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.sbcsgroupprober">chardet.sbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.langturkishmodel"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/langturkishmodel.py" type="text/plain"><tt>chardet.langturkishmodel</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.sbcharsetprober">chardet.sbcharsetprober</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.sbcsgroupprober">chardet.sbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.latin1prober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/latin1prober.py" type="text/plain"><tt>chardet.latin1prober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.universaldetector">chardet.universaldetector</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.macromanprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/macromanprober.py" type="text/plain"><tt>chardet.macromanprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.universaldetector">chardet.universaldetector</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.mbcharsetprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/mbcharsetprober.py" type="text/plain"><tt>chardet.mbcharsetprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.chardistribution">chardet.chardistribution</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.big5prober">chardet.big5prober</a>
+ &#8226;   <a href="#chardet.cp949prober">chardet.cp949prober</a>
+ &#8226;   <a href="#chardet.eucjpprober">chardet.eucjpprober</a>
+ &#8226;   <a href="#chardet.euckrprober">chardet.euckrprober</a>
+ &#8226;   <a href="#chardet.euctwprober">chardet.euctwprober</a>
+ &#8226;   <a href="#chardet.gb2312prober">chardet.gb2312prober</a>
+ &#8226;   <a href="#chardet.johabprober">chardet.johabprober</a>
+ &#8226;   <a href="#chardet.sjisprober">chardet.sjisprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.mbcsgroupprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/mbcsgroupprober.py" type="text/plain"><tt>chardet.mbcsgroupprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.big5prober">chardet.big5prober</a>
+ &#8226;   <a href="#chardet.charsetgroupprober">chardet.charsetgroupprober</a>
+ &#8226;   <a href="#chardet.cp949prober">chardet.cp949prober</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#chardet.eucjpprober">chardet.eucjpprober</a>
+ &#8226;   <a href="#chardet.euckrprober">chardet.euckrprober</a>
+ &#8226;   <a href="#chardet.euctwprober">chardet.euctwprober</a>
+ &#8226;   <a href="#chardet.gb2312prober">chardet.gb2312prober</a>
+ &#8226;   <a href="#chardet.johabprober">chardet.johabprober</a>
+ &#8226;   <a href="#chardet.sjisprober">chardet.sjisprober</a>
+ &#8226;   <a href="#chardet.utf8prober">chardet.utf8prober</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.universaldetector">chardet.universaldetector</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.mbcssm"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/mbcssm.py" type="text/plain"><tt>chardet.mbcssm</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.codingstatemachinedict">chardet.codingstatemachinedict</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.big5prober">chardet.big5prober</a>
+ &#8226;   <a href="#chardet.cp949prober">chardet.cp949prober</a>
+ &#8226;   <a href="#chardet.eucjpprober">chardet.eucjpprober</a>
+ &#8226;   <a href="#chardet.euckrprober">chardet.euckrprober</a>
+ &#8226;   <a href="#chardet.euctwprober">chardet.euctwprober</a>
+ &#8226;   <a href="#chardet.gb2312prober">chardet.gb2312prober</a>
+ &#8226;   <a href="#chardet.johabprober">chardet.johabprober</a>
+ &#8226;   <a href="#chardet.sjisprober">chardet.sjisprober</a>
+ &#8226;   <a href="#chardet.utf8prober">chardet.utf8prober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.resultdict"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/resultdict.py" type="text/plain"><tt>chardet.resultdict</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.universaldetector">chardet.universaldetector</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.sbcharsetprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/sbcharsetprober.py" type="text/plain"><tt>chardet.sbcharsetprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.hebrewprober">chardet.hebrewprober</a>
+ &#8226;   <a href="#chardet.langbulgarianmodel">chardet.langbulgarianmodel</a>
+ &#8226;   <a href="#chardet.langgreekmodel">chardet.langgreekmodel</a>
+ &#8226;   <a href="#chardet.langhebrewmodel">chardet.langhebrewmodel</a>
+ &#8226;   <a href="#chardet.langrussianmodel">chardet.langrussianmodel</a>
+ &#8226;   <a href="#chardet.langthaimodel">chardet.langthaimodel</a>
+ &#8226;   <a href="#chardet.langturkishmodel">chardet.langturkishmodel</a>
+ &#8226;   <a href="#chardet.sbcsgroupprober">chardet.sbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.sbcsgroupprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/sbcsgroupprober.py" type="text/plain"><tt>chardet.sbcsgroupprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.charsetgroupprober">chardet.charsetgroupprober</a>
+ &#8226;   <a href="#chardet.hebrewprober">chardet.hebrewprober</a>
+ &#8226;   <a href="#chardet.langbulgarianmodel">chardet.langbulgarianmodel</a>
+ &#8226;   <a href="#chardet.langgreekmodel">chardet.langgreekmodel</a>
+ &#8226;   <a href="#chardet.langhebrewmodel">chardet.langhebrewmodel</a>
+ &#8226;   <a href="#chardet.langrussianmodel">chardet.langrussianmodel</a>
+ &#8226;   <a href="#chardet.langthaimodel">chardet.langthaimodel</a>
+ &#8226;   <a href="#chardet.langturkishmodel">chardet.langturkishmodel</a>
+ &#8226;   <a href="#chardet.sbcharsetprober">chardet.sbcharsetprober</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.universaldetector">chardet.universaldetector</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.sjisprober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/sjisprober.py" type="text/plain"><tt>chardet.sjisprober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.chardistribution">chardet.chardistribution</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#chardet.jpcntx">chardet.jpcntx</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.mbcssm">chardet.mbcssm</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.universaldetector"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/universaldetector.py" type="text/plain"><tt>chardet.universaldetector</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.charsetgroupprober">chardet.charsetgroupprober</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#chardet.escprober">chardet.escprober</a>
+ &#8226;   <a href="#chardet.latin1prober">chardet.latin1prober</a>
+ &#8226;   <a href="#chardet.macromanprober">chardet.macromanprober</a>
+ &#8226;   <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+ &#8226;   <a href="#chardet.resultdict">chardet.resultdict</a>
+ &#8226;   <a href="#chardet.sbcsgroupprober">chardet.sbcsgroupprober</a>
+ &#8226;   <a href="#chardet.utf1632prober">chardet.utf1632prober</a>
+ &#8226;   <a href="#codecs">codecs</a>
+ &#8226;   <a href="#logging">logging</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet">chardet</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.utf1632prober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/utf1632prober.py" type="text/plain"><tt>chardet.utf1632prober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.universaldetector">chardet.universaldetector</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.utf8prober"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/utf8prober.py" type="text/plain"><tt>chardet.utf8prober</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
+ &#8226;   <a href="#chardet.mbcssm">chardet.mbcssm</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet.mbcsgroupprober">chardet.mbcsgroupprober</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="chardet.version"></a>
+  <a target="code" href="///C:/Users/abc15/AppData/Local/Programs/Python/Python311/Lib/site-packages/chardet/version.py" type="text/plain"><tt>chardet.version</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#chardet">chardet</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="cheroot"></a>
   <a target="code" href="" type="text/plain"><tt>cheroot</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
@@ -4739,6 +5684,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#_pickle">_pickle</a>
+ &#8226;   <a href="#chardet.universaldetector">chardet.universaldetector</a>
  &#8226;   <a href="#encodings">encodings</a>
  &#8226;   <a href="#encodings.ascii">encodings.ascii</a>
  &#8226;   <a href="#encodings.base64_codec">encodings.base64_codec</a>
@@ -10172,6 +11118,7 @@ imported by:
  &#8226;   <a href="#asyncio.runners">asyncio.runners</a>
  &#8226;   <a href="#asyncio.sslproto">asyncio.sslproto</a>
  &#8226;   <a href="#asyncio.timeouts">asyncio.timeouts</a>
+ &#8226;   <a href="#chardet.enums">chardet.enums</a>
  &#8226;   <a href="#http">http</a>
  &#8226;   <a href="#inspect">inspect</a>
  &#8226;   <a href="#jinja2.utils">jinja2.utils</a>
@@ -20006,6 +20953,9 @@ imports:
 imported by:
     <a href="#asyncio.futures">asyncio.futures</a>
  &#8226;   <a href="#asyncio.log">asyncio.log</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
+ &#8226;   <a href="#chardet.universaldetector">chardet.universaldetector</a>
  &#8226;   <a href="#concurrent.futures._base">concurrent.futures._base</a>
  &#8226;   <a href="#gevent.tests.test__monkey_logging">gevent.tests.test__monkey_logging</a>
  &#8226;   <a href="#gevent.tests.test__pywsgi">gevent.tests.test__pywsgi</a>
@@ -20694,7 +21644,8 @@ imported by:
   <a target="code" href="-" type="text/plain"><tt>module</tt></a>
 <span class="moduletype">NamespacePackage</span>  <div class="import">
 imported by:
-    <a href="#module.env">module.env</a>
+    <a href="#module.OShelper">module.OShelper</a>
+ &#8226;   <a href="#module.env">module.env</a>
  &#8226;   <a href="#module.network">module.network</a>
 
   </div>
@@ -20702,8 +21653,26 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="module.OShelper"></a>
+  <a target="code" href="///C:/Users/abc15/Desktop/Universal%20Translator/module/OShelper.py" type="text/plain"><tt>module.OShelper</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#chardet">chardet</a>
+ &#8226;   <a href="#module">module</a>
+ &#8226;   <a href="#os">os</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#main.py">main.py</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="module.env"></a>
-  <a target="code" href="///C:/Users/abc15/Desktop/Universal%20Translation/module/env.py" type="text/plain"><tt>module.env</tt></a>
+  <a target="code" href="///C:/Users/abc15/Desktop/Universal%20Translator/module/env.py" type="text/plain"><tt>module.env</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#module">module</a>
@@ -20720,7 +21689,7 @@ imported by:
 
 <div class="node">
   <a name="module.network"></a>
-  <a target="code" href="///C:/Users/abc15/Desktop/Universal%20Translation/module/network.py" type="text/plain"><tt>module.network</tt></a>
+  <a target="code" href="///C:/Users/abc15/Desktop/Universal%20Translator/module/network.py" type="text/plain"><tt>module.network</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#bottle">bottle</a>
@@ -22032,6 +23001,7 @@ imported by:
  &#8226;   <a href="#lzma">lzma</a>
  &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#mimetypes">mimetypes</a>
+ &#8226;   <a href="#module.OShelper">module.OShelper</a>
  &#8226;   <a href="#multiprocessing.connection">multiprocessing.connection</a>
  &#8226;   <a href="#multiprocessing.context">multiprocessing.context</a>
  &#8226;   <a href="#multiprocessing.forkserver">multiprocessing.forkserver</a>
@@ -24949,6 +25919,8 @@ imported by:
  &#8226;   <a href="#cffi.api">cffi.api</a>
  &#8226;   <a href="#cffi.cparser">cffi.cparser</a>
  &#8226;   <a href="#cgi">cgi</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.universaldetector">chardet.universaldetector</a>
  &#8226;   <a href="#clr_loader.mono">clr_loader.mono</a>
  &#8226;   <a href="#clr_loader.util.find">clr_loader.util.find</a>
  &#8226;   <a href="#colorama.ansitowin32">colorama.ansitowin32</a>
@@ -32018,6 +32990,24 @@ imports:
 imported by:
     <a href="#asyncio.staggered">asyncio.staggered</a>
  &#8226;   <a href="#asyncio.timeouts">asyncio.timeouts</a>
+ &#8226;   <a href="#chardet">chardet</a>
+ &#8226;   <a href="#chardet.chardistribution">chardet.chardistribution</a>
+ &#8226;   <a href="#chardet.charsetgroupprober">chardet.charsetgroupprober</a>
+ &#8226;   <a href="#chardet.charsetprober">chardet.charsetprober</a>
+ &#8226;   <a href="#chardet.codingstatemachinedict">chardet.codingstatemachinedict</a>
+ &#8226;   <a href="#chardet.escprober">chardet.escprober</a>
+ &#8226;   <a href="#chardet.eucjpprober">chardet.eucjpprober</a>
+ &#8226;   <a href="#chardet.hebrewprober">chardet.hebrewprober</a>
+ &#8226;   <a href="#chardet.jpcntx">chardet.jpcntx</a>
+ &#8226;   <a href="#chardet.latin1prober">chardet.latin1prober</a>
+ &#8226;   <a href="#chardet.macromanprober">chardet.macromanprober</a>
+ &#8226;   <a href="#chardet.mbcharsetprober">chardet.mbcharsetprober</a>
+ &#8226;   <a href="#chardet.resultdict">chardet.resultdict</a>
+ &#8226;   <a href="#chardet.sbcharsetprober">chardet.sbcharsetprober</a>
+ &#8226;   <a href="#chardet.sjisprober">chardet.sjisprober</a>
+ &#8226;   <a href="#chardet.universaldetector">chardet.universaldetector</a>
+ &#8226;   <a href="#chardet.utf1632prober">chardet.utf1632prober</a>
+ &#8226;   <a href="#chardet.utf8prober">chardet.utf8prober</a>
  &#8226;   <a href="#clr_loader">clr_loader</a>
  &#8226;   <a href="#clr_loader.ffi">clr_loader.ffi</a>
  &#8226;   <a href="#clr_loader.hostfxr">clr_loader.hostfxr</a>

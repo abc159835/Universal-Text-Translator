@@ -3,29 +3,21 @@
     "baseUrl": ".",
     "target": "esnext",
     "useDefineForClassFields": true,
-    "allowSyntheticDefaultImports": true,
-    "composite": true,
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
-    "sourceMap": false,
+    "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": [
-      "node",
-      "vuetify"
-    ],
     "paths": {
-      "@/*": ["src/*"]
+      "~/*": ["src/*"]
     },
+    "skipLibCheck": true
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "vite.config.ts"
-  ]
+  "vueCompilerOptions": {
+    "target": 3,
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
