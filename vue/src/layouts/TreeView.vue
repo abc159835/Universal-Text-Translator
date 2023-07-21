@@ -1,8 +1,10 @@
 <template>
     <el-scrollbar height="100%">
-        <el-input v-model="filterText" placeholder="Filter keyword" />
-        <el-tree ref="treeRef" class="filter-tree" :data="data" :props="defaultProps" :filter-node-method="filterNode"
-            @node-click="handleNodeClick" />
+        <el-card style="border-radius: 0px">
+            <el-input v-model="filterText" placeholder="Filter keyword" />
+            <el-tree ref="treeRef" class="filter-tree" :data="data" :props="defaultProps" :filter-node-method="filterNode"
+                @node-click="handleNodeClick" />
+        </el-card>
     </el-scrollbar>
 </template>
   
@@ -43,23 +45,23 @@ const filterNode = (value: string, data: TreeNodeData) => {
 
 // 事件声明
 var emit = defineEmits<{
-    (event: 'content_change', data: string, info:string): void
+    (event: 'content_change', data: string, info: string): void
 }>()
 
 const handleNodeClick = async (data: Tree) => {
-    if (!Reflect.has(data,'children')) {
+    if (!Reflect.has(data, 'children')) {
         const loading = ElLoading.service({
             lock: true,
             text: 'Loading',
             background: 'rgba(0, 0, 0, 0.7)',
         })
         var datas = await pywebview.api.get_file_content(data.path)
-        if (datas){
+        if (datas) {
             var info = datas.info
-            emit('content_change', datas.content,info)
+            emit('content_change', datas.content, info)
         }
-        else{
-            ElMessage.error(data.label+' 不是一个有效的文本文件！')
+        else {
+            ElMessage.error(data.label + ' 不是一个有效的文本文件！')
         }
         loading.close()
     }

@@ -3,24 +3,10 @@
 </template>
 
 <script lang="ts" setup>
+import { throttle } from '~/func'
 
-// 节流函数，且最后一次也执行。
-const throttle = (fn: Function, rateTime: number) => {
-    let timer: any = null;
-    let prev = Date.now() - rateTime;
-    return (...args: any[]) => {
-        let remaining = rateTime - (Date.now() - prev);
-        clearTimeout(timer);
-        if (remaining <= 0) {
-            fn.apply(this, args);
-            prev = Date.now();
-        } else {
-            timer = setTimeout(() => {
-                fn.apply(this, args)
-            }, remaining)
-        }
-    }
-}
+
+
 
 // props透传
 var props = defineProps<{

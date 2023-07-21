@@ -1,0 +1,10 @@
+- steps:
+  - remove: ^\*.*$
+  - remove: ^;.*$
+  - remove: \【[^\]]*\】
+  - remove: \[[^\]]*\]
+  - remove: 「
+  - remove: 」
+  - replace: oooo-->pppp
+  - other: s2t
+  - other: openAI_translate

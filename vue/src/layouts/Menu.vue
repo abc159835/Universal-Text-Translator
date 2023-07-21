@@ -1,6 +1,6 @@
 <template>
-    <el-menu mode="horizontal" style="height: 100%;">
-        <el-menu-item index="1" @click="open_folder">Open folder</el-menu-item>
+    <!-- <el-menu mode="horizontal" style="height: 100%;">
+        <el-menu-item index="1" @click="open_folder">Open Folder</el-menu-item>
         <el-menu-item index="2">
             <el-button type="primary" :icon="Search">Search</el-button>
         </el-menu-item>
@@ -9,17 +9,26 @@
                 <el-button type="primary" :icon="InfoFilled" />
             </el-tooltip>
         </el-menu-item>
-    </el-menu>
+    </el-menu> -->
+    <div style="display: flex;align-items: center; height: 100%; margin-left: 8px;">
+        <el-button type="primary" :icon="Folder" @click="open_folder">Open Folder</el-button>
+        <el-button type="primary" :icon="Folder">Export Folder</el-button>
+        <el-button type="primary" :icon="Folder">Setting</el-button>
+        <el-button type="primary" :icon="Folder">Task List</el-button>
+        <el-tooltip :content="info" raw-content>
+            <el-button type="primary" :icon="InfoFilled" />
+        </el-tooltip>
+        <el-button type="success" >Auto Translation</el-button>
+    </div>
 </template>
 
 <script setup lang="ts">
-import { Search, InfoFilled } from '@element-plus/icons-vue'
+import { Search, InfoFilled,Folder } from '@element-plus/icons-vue'
 import { ElLoading } from 'element-plus'
-
-declare const pywebview: any
+declare const pywebview:any
 
 defineProps<{
-  info:string
+    info: string
 }>()
 
 // 事件声明
@@ -35,7 +44,7 @@ const open_folder = async () => {
             text: 'Loading',
             background: 'rgba(0, 0, 0, 0.7)',
         })
-        var data = await pywebview.api.get_folder_all_file(path)
+        var data = await pywebview.api.recursive_read_folder(path)
         emit('project_change', data)
         loading.close()
     }

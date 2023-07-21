@@ -1,24 +1,27 @@
 from module.network import app
-from module.env import env
-from loguru import logger
 import module.OShelper
 import webview
 
-
-"""文件夹选择"""
-def open_folder():
-    result = window.create_file_dialog(dialog_type=webview.FOLDER_DIALOG)
-    if result is not None:
-        return result[0]
+    
+def start(env = True):
+    if env:
+        window = webview.create_window('Universal Translator',url='http://localhost:5173/',width=2160,height=1200)
     else:
-        return None
+        window = webview.create_window('Universal Translator',url=app,width=2160,height=1200)
+        
+    def open_folder():
+        """文件夹选择"""
+        result = window.create_file_dialog(dialog_type=webview.FOLDER_DIALOG)
+        if result is not None:
+            return result[0]
+        else:
+            return None
 
-if env():
-    window = webview.create_window('Universal Translator',url='http://localhost:5173/',width=2160,height=1200)
-else:
-    window = webview.create_window('Universal Translator',url=app,width=2160,height=1200)
+    window.expose(module.OShelper.recursive_read_folder,open_folder,module.OShelper.get_file_content,module.OShelper.global_config,module.OShelper.set_global_config)
 
-window.expose(module.OShelper.get_folder_all_file,open_folder,module.OShelper.get_file_content)
+    # MainThread blocked
+    webview.start(debug=True)
 
-# MainThread blocked
-webview.start(debug=True)
+
+module.OShelper.init()
+start()

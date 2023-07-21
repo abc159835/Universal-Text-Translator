@@ -9,6 +9,7 @@
   </l-navigation-drawer>
 
   <r-navigation-drawer :style="operate_style">
+    <Opreate />
     <Sash location="left" :width="operate_width"  @attribute_change="operate_change" />
   </r-navigation-drawer>
   
@@ -23,14 +24,24 @@ import Sash from './components/Sash.vue';
 import MainPage from './layouts/MainPage.vue';
 import Menu from './layouts/Menu.vue'
 import TreeView from './layouts/TreeView.vue';
+import Opreate from './layouts/Opreate.vue';
 
 import { ref,watch,reactive } from 'vue';
-
-declare const pywebview: any
+import { global_config,set_global_config } from '~/func'
 
 // 初始宽度
-var slider_width = ref(200)
-var operate_width = ref(160)
+var slider_width = ref(240)
+var operate_width = ref(240)
+
+// 读取配置
+global_config('slider_width',(res:number)=>{
+  slider_width.value = res
+})
+
+global_config('operate_width',(res:number)=>{
+  operate_width.value = res
+})
+
 
 var main_style = reactive({
   left: slider_width.value + 'px',
@@ -51,12 +62,14 @@ watch(slider_width, () => {
   var p = slider_width.value + 'px';
   main_style.left = p
   slider_style.width = p
+  set_global_config('slider_width',slider_width.value)
 });
 
 watch(operate_width, () => {
   var p = operate_width.value + 'px';
   main_style.right = p
   operate_style.width = p
+  set_global_config('operate_width',operate_width.value)
 });
 
 
