@@ -12,7 +12,8 @@
   "dependencies": {
     "element-plus": "^2.3.5",
     "monaco-editor": "^0.38.0",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@iconify-json/ep": "^1.1.10",

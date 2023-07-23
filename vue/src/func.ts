@@ -1,4 +1,4 @@
-declare const pywebview:any
+declare const pywebview: any
 
 //防抖函数
 export const debounce = (fn: Function, debTime: number) => {
@@ -30,11 +30,24 @@ export const throttle = (fn: Function, rateTime: number) => {
     }
 }
 
-export const global_config = async (name:string,func:Function) => {
-    var res = await pywebview.api.global_config(name)
+export const global_config = async (name: string, func: Function) => {
+    var res = await pywebview.api._global_config(name)
     func(res)
 }
 
-export const set_global_config = debounce((name:string,value:any) => {
-    pywebview.api.set_global_config(name,value)
-},1000)
+export const set_global_config = debounce((name: string, value: any) => {
+    pywebview.api._set_global_config(name, value)
+}, 1000)
+
+//安全的执行要调用api的方法
+export const func_with_pywebview = (func: Function) => {
+    if (typeof pywebview !== "undefined") {
+        func()
+    }
+    else {
+        // 监听 window.pywebviewready 事件
+        window.addEventListener("pywebviewready", () => {
+            func()
+        })
+    }
+}

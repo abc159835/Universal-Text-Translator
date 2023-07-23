@@ -6,8 +6,6 @@
 import { throttle } from '~/func'
 
 
-
-
 // props透传
 var props = defineProps<{
     location: string

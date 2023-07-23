@@ -1,2 +1,4 @@
-operate_width: 278
-slider_width: 262
+operate_width: 329
+rule: rules.yaml
+slider_width: 318
+translator: OpenAI

@@ -16,7 +16,12 @@ import "uno.css";
 import "element-plus/theme-chalk/src/message.scss";
 
 const app = createApp(App);
+
+import router from './router'
+app.use(router)
 //app.use(ElementPlus);
+
+
 app.mount("#app");
 
 

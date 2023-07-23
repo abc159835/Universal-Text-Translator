@@ -9,15 +9,24 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Config: typeof import('./components/Config.vue')['default']
+    copy: typeof import('./components/Sash copy.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
-    ElCol: typeof import('element-plus/es')['ElCol']
     ElDivider: typeof import('element-plus/es')['ElDivider']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElInput: typeof import('element-plus/es')['ElInput']
-    ElRow: typeof import('element-plus/es')['ElRow']
+    ElInputNumber: typeof import('element-plus/es')['ElInputNumber']
+    ElMenu: typeof import('element-plus/es')['ElMenu']
+    ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElOption: typeof import('element-plus/es')['ElOption']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSpace: typeof import('element-plus/es')['ElSpace']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
     Sash: typeof import('./components/Sash.vue')['default']
   }
 }

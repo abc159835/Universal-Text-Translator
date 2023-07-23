@@ -32,6 +32,7 @@ self.MonacoEnvironment = {
 //文本内容
 var props = defineProps<{
   content:string
+  selections: Array<Array<number>>
 }>()
 
 const editorContainer = ref(null);
@@ -62,7 +63,21 @@ const initEditor = (element: HTMLElement | null) => {
 };
 
 watch(props, () => {
+  var Collections = []
   editor.setValue(props.content)
+  for(let selection of props.selections){
+    var selections = new monaco.Selection (selection[0], selection[1], selection[2], selection[3])
+    Collections.push(
+      {
+        'range':selections,
+        'options':{
+          isWholeLine: false,
+          inlineClassName: 'InlineDecoration' 
+        }
+      }
+    )
+  }
+  editor.createDecorationsCollection(Collections)
 });
 
 
@@ -71,3 +86,9 @@ onMounted(() => {
 });
 
 </script>
+
+<style>
+.InlineDecoration {
+  background-color: white;
+}
+</style>

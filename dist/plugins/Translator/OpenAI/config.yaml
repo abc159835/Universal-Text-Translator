@@ -1,0 +1,12 @@
+API-KEY: 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
+model:
+- gpt-3.5-turbo
+- - gpt-3.5-turbo
+  - gpt-4
+prompt: 作为一个翻译工具，你会收到日文文本，请把文本翻译为中文，允许润色文本，使逻辑更加流畅。
+temperature:
+- 0.8
+- max: 2
+  min: 0
+  step: 0.1
+wait_time: 20
