@@ -8,7 +8,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('./vue/dist', 'static/')],
+    datas=[('./vue/dist', 'static/'), ('./hooks', './')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

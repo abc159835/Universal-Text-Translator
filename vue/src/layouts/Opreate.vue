@@ -24,7 +24,7 @@
       </el-space>
       <el-slider v-model="posi" :max="line_count" :min="line_count > 0 ? 1 : 0" @input="emit('handle_click',posi)" :step="1"/>
       <el-divider />
-      <el-input :model-value="modelValue" @input="res => emit('update:modelValue',res)" :rows="5" type="textarea" placeholder="Translation displayed here" />
+      <el-input :model-value="modelValue" @input="(res: any) => emit('update:modelValue',res)" :rows="5" type="textarea" placeholder="Translation displayed here" />
     </el-card>
   </el-scrollbar>
 </template>

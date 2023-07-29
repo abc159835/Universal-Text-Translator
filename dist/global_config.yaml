@@ -5,7 +5,6 @@ language:
   number: '[0-9]+'
   zh: '[\u4e00-\u9fa5]+'
 operate_width: 310
-path: C:\Users\abc15\Desktop\scripts
-rule: rules - 副本.yaml
-slider_width: 313
+rule: rules - 1.yaml
+slider_width: 317
 translator: OpenAI

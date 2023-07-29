@@ -5,6 +5,9 @@ import module.OShelper
 import module.pywebview
 import module.Translate
 import webview
+import openai
+import opencc
+
 
 init_func = []
 expose_func = []

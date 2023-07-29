@@ -1,3 +1,5 @@
+
+
 from module.TextParse import register
 import opencc
 

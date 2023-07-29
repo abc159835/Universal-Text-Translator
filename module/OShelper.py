@@ -191,7 +191,7 @@ def _get_variable(name):
 
 def _set_global_config(key, value):
     global global_configs
-    old_value = global_configs[key]
+    old_value = global_configs.get(key)
     global_configs[key] = value
     dump_config(global_configs,PATH.joinpath('global_config.yaml'))
 
@@ -200,7 +200,8 @@ def _set_global_config(key, value):
     elif key == 'translator':
         translator_change()
     elif key == 'path':
-        translate_dict_save(old_value)
+        if old_value:
+            translate_dict_save(old_value)
         translate_dict_init(value)
     
     

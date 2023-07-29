@@ -12,7 +12,7 @@ translate_dict = {}
 export_list = []
 
 def json_init(rootpath, path, json_object):
-    if path and Path(rootpath).joinpath(path).exists():
+    if rootpath and Path(rootpath).joinpath(path).exists():
         with open(Path(rootpath).joinpath(path),'r',encoding='utf-8') as f:
             json_object = json.load(f)
     return json_object
