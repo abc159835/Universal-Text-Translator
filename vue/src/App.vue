@@ -22,10 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount } from 'vue'
-onBeforeMount(()=>{
 
-})
 </script>
 
 <style>
@@ -34,4 +31,5 @@ l-app-menu {
   top: 0px;
   height: 40px;
 }
+
 </style>

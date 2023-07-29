@@ -1,0 +1,100 @@
+Date : 2023-07-29 00:27:22
+Directory : c:\Users\abc15\Desktop\Universal Translator
+Total : 44 files,  1976 codes, 143 comments, 420 blanks, all 2539 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| vue                |          9 |        745 |          2 |        122 |        869 |
+| Python             |         11 |        733 |         92 |        229 |      1,054 |
+| TypeScript         |          7 |        287 |         23 |         40 |        350 |
+| SCSS               |          3 |         53 |         14 |         14 |         81 |
+| Ruby               |          1 |         45 |          1 |          6 |         52 |
+| YAML               |          5 |         42 |          0 |          4 |         46 |
+| JSON               |          1 |         31 |          0 |          1 |         32 |
+| JSON with Comments |          1 |         17 |          6 |          1 |         24 |
+| HTML               |          1 |         13 |          5 |          1 |         19 |
+| Batch              |          3 |          8 |          0 |          0 |          8 |
+| Markdown           |          1 |          1 |          0 |          1 |          2 |
+| XML                |          1 |          1 |          0 |          1 |          2 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                   | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                      |         44 |      1,976 |        143 |        420 |      2,539 |
+| . (Files)                                                                              |          6 |        108 |          9 |         26 |        143 |
+| dist                                                                                   |          7 |         96 |         16 |         29 |        141 |
+| dist (Files)                                                                           |          1 |         11 |          0 |          1 |         12 |
+| dist\plugins                                                                           |          6 |         85 |         16 |         28 |        129 |
+| dist\plugins\TextParser                                                                |          3 |         36 |          0 |          6 |         42 |
+| dist\plugins\Translator                                                                |          3 |         49 |         16 |         22 |         87 |
+| dist\plugins\Translator\DeepL                                                          |          1 |          2 |          0 |          1 |          3 |
+| dist\plugins\Translator\OpenAI                                                         |          2 |         47 |         16 |         21 |         84 |
+| module                                                                                 |          8 |        625 |         68 |        185 |        878 |
+| vue                                                                                    |         23 |      1,147 |         50 |        180 |      1,377 |
+| vue (Files)                                                                            |          4 |        116 |         16 |          9 |        141 |
+| vue\src                                                                                |         19 |      1,031 |         34 |        171 |      1,236 |
+| vue\src (Files)                                                                        |          6 |        238 |         19 |         35 |        292 |
+| vue\src\assets                                                                         |          1 |          1 |          0 |          1 |          2 |
+| vue\src\components                                                                     |          2 |        130 |          0 |         18 |        148 |
+| vue\src\layouts                                                                        |          3 |        163 |          0 |         33 |        196 |
+| vue\src\router                                                                         |          1 |         23 |          1 |          3 |         27 |
+| vue\src\styles                                                                         |          3 |         53 |         14 |         14 |         81 |
+| vue\src\styles (Files)                                                                 |          1 |         17 |          4 |          5 |         26 |
+| vue\src\styles\element                                                                 |          2 |         36 |         10 |          9 |         55 |
+| vue\src\view                                                                           |          3 |        423 |          0 |         67 |        490 |
++----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                               | language           | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\abc15\Desktop\Universal Translator\Application.spec                           | Ruby               |         45 |          1 |          6 |         52 |
+| c:\Users\abc15\Desktop\Universal Translator\README.md                                  | Markdown           |          1 |          0 |          1 |          2 |
+| c:\Users\abc15\Desktop\Universal Translator\build.bat                                  | Batch              |          2 |          0 |          0 |          2 |
+| c:\Users\abc15\Desktop\Universal Translator\dist\global_config.yaml                    | YAML               |         11 |          0 |          1 |         12 |
+| c:\Users\abc15\Desktop\Universal Translator\dist\plugins\TextParser\main.py            | Python             |         19 |          0 |          5 |         24 |
+| c:\Users\abc15\Desktop\Universal Translator\dist\plugins\TextParser\rules - 副本.yaml    | YAML               |          6 |          0 |          0 |          6 |
+| c:\Users\abc15\Desktop\Universal Translator\dist\plugins\TextParser\rules.yaml         | YAML               |         11 |          0 |          1 |         12 |
+| c:\Users\abc15\Desktop\Universal Translator\dist\plugins\Translator\DeepL\config.yaml  | YAML               |          2 |          0 |          1 |          3 |
+| c:\Users\abc15\Desktop\Universal Translator\dist\plugins\Translator\OpenAI\config.yaml | YAML               |         12 |          0 |          1 |         13 |
+| c:\Users\abc15\Desktop\Universal Translator\dist\plugins\Translator\OpenAI\main.py     | Python             |         35 |         16 |         20 |         71 |
+| c:\Users\abc15\Desktop\Universal Translator\main.py                                    | Python             |         54 |          8 |         19 |         81 |
+| c:\Users\abc15\Desktop\Universal Translator\module\OShelper.py                         | Python             |        165 |          8 |         49 |        222 |
+| c:\Users\abc15\Desktop\Universal Translator\module\Task.py                             | Python             |         88 |          6 |         18 |        112 |
+| c:\Users\abc15\Desktop\Universal Translator\module\TextParse.py                        | Python             |        210 |         22 |         60 |        292 |
+| c:\Users\abc15\Desktop\Universal Translator\module\Translate.py                        | Python             |         73 |          0 |         21 |         94 |
+| c:\Users\abc15\Desktop\Universal Translator\module\debounce.py                         | Python             |         14 |          9 |          9 |         32 |
+| c:\Users\abc15\Desktop\Universal Translator\module\env.py                              | Python             |          8 |          1 |          3 |         12 |
+| c:\Users\abc15\Desktop\Universal Translator\module\network.py                          | Python             |         20 |         20 |         13 |         53 |
+| c:\Users\abc15\Desktop\Universal Translator\module\pywebview.py                        | Python             |         47 |          2 |         12 |         61 |
+| c:\Users\abc15\Desktop\Universal Translator\package with console.bat                   | Batch              |          3 |          0 |          0 |          3 |
+| c:\Users\abc15\Desktop\Universal Translator\package.bat                                | Batch              |          3 |          0 |          0 |          3 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\index.html                             | HTML               |         13 |          5 |          1 |         19 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\package.json                           | JSON               |         31 |          0 |          1 |         32 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\App.vue                            | vue                |         29 |          2 |          4 |         35 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\assets\vue.svg                     | XML                |          1 |          0 |          1 |          2 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\components.d.ts                    | TypeScript         |         32 |          5 |          3 |         40 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\components\Config.vue              | vue                |         26 |          0 |          2 |         28 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\components\Sash.vue                | vue                |        104 |          0 |         16 |        120 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\env.d.ts                           | TypeScript         |          5 |          2 |          2 |          9 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\func.ts                            | TypeScript         |         86 |          4 |         10 |        100 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\layouts\Menu.vue                   | vue                |         57 |          0 |         11 |         68 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\layouts\Opreate.vue                | vue                |         48 |          0 |          9 |         57 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\layouts\TreeView.vue               | vue                |         58 |          0 |         13 |         71 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\main.ts                            | TypeScript         |         10 |          6 |         12 |         28 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\monaco_editor.ts                   | TypeScript         |         76 |          0 |          4 |         80 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\router\index.ts                    | TypeScript         |         23 |          1 |          3 |         27 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\styles\element\dark.scss           | SCSS               |          8 |          1 |          3 |         12 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\styles\element\index.scss          | SCSS               |         28 |          9 |          6 |         43 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\styles\index.scss                  | SCSS               |         17 |          4 |          5 |         26 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\view\Main.vue                      | vue                |        237 |          0 |         39 |        276 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\view\Setting.vue                   | vue                |         97 |          0 |         12 |        109 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\src\view\TaskList.vue                  | vue                |         89 |          0 |         16 |        105 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\tsconfig.json                          | JSON with Comments |         17 |          6 |          1 |         24 |
+| c:\Users\abc15\Desktop\Universal Translator\vue\vite.config.ts                         | TypeScript         |         55 |          5 |          6 |         66 |
+| Total                                                                                  |                    |      1,976 |        143 |        420 |      2,539 |
++----------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

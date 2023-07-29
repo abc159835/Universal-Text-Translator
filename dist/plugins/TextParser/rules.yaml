@@ -1,0 +1,12 @@
+step:
+  - remove: ^\*.*$
+  - remove: ^@.*$
+  - remove: ^;.*$
+  - remove: ^#.*$
+  - remove: \[.*?\]
+  - remove: 「
+  - remove: 」
+  - include: jp
+
+fix:
+  \[.*?\]: ABC

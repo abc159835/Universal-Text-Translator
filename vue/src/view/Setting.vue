@@ -1,10 +1,10 @@
 <template>
     <div id="setting_background">
         <el-scrollbar class="box-card">
-            <el-card>
+            <el-card style="width: 757px;">
                 <template #header>
                     <div class="card-header">
-                        <span>全局设置</span>
+                        <span style="font-size: larger;">全局设置</span>
                         <el-button class="button" type="success" @click="save">Save</el-button>
                     </div>
                 </template>
@@ -51,13 +51,13 @@ var translator = ref('')
 
 onActivated(() => {
     func_with_pywebview(async () => {
+        rule.value = await pywebview.api._global_config("rule")        
+        translator.value = await pywebview.api._global_config('translator')
+        
         rule_list.value = await pywebview.api._get_variable("rule_list")
         translator_list.value = await pywebview.api._get_variable("translator_list")
         config.value = await pywebview.api._global_config(null)
         translator_config.value = await pywebview.api._get_translator_config(translator.value)
-
-        rule.value = await pywebview.api._global_config("rule")        
-        translator.value = await pywebview.api._global_config('translator')
     })
 })
 

@@ -1,11 +1,15 @@
 from module.network import app
-from module.Task import Taskhelper
+from module.env import PATH
+import module.TextParse
 import module.OShelper
+import module.pywebview
+import module.Translate
 import webview
 
 init_func = []
 expose_func = []
 close_func = []
+
 
 def getfunc_from_module(module:module):
     """将函数分类"""
@@ -49,11 +53,30 @@ def start(env = False):
         print('Expose api '+ func.__name__)
     
     # MainThread blocked
-    webview.start(debug = True)
+    webview.start(debug = env)
 
-task_helper = Taskhelper()
+
+
+# 0
+getfunc_from_module(module.TextParse)
+
+# 1
 getfunc_from_module(module.OShelper)
-getfunc_from_module(task_helper)
 
-init()
-start(env = True)
+# 2
+getfunc_from_module(module.Translate.task_helper)
+
+# 3
+module_path = PATH.joinpath('plugins\TextParser\main.py')
+_module = module.Translate.import_module(module_path)
+getfunc_from_module(_module)
+
+# 4
+getfunc_from_module(module.Translate)
+
+try:
+    init()
+except:
+    module.pywebview.Error()
+
+start(env = False)

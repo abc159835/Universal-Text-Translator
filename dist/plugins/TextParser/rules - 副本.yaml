@@ -1,0 +1,9 @@
+step:
+  - find: 「(.*)」
+  - include:
+    - zh
+    - jp
+  - convert: t2s
+
+fix:
+  \%.*?\%: ABC

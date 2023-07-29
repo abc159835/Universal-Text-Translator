@@ -1,5 +1,0 @@
-- remove: ^\*.*$
-- remove: ^;.*$
-- remove: \[.*?\]|\【.*?\】
-- remove: 「
-- remove: 」

@@ -2,7 +2,7 @@
     <el-scrollbar height="100%">
         <el-card style="border-radius: 0px">
             <el-input v-model="filterText" placeholder="Filter keyword" />
-            <el-tree ref="treeRef" class="filter-tree" :data="data" :props="defaultProps" :filter-node-method="filterNode"
+            <el-tree highlight-current ref="treeRef" class="filter-tree" :data="data" :props="defaultProps" :filter-node-method="filterNode"
                 @node-click="handleNodeClick" />
         </el-card>
     </el-scrollbar>
@@ -10,20 +10,24 @@
   
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { ElLoading, ElMessage, ElTree } from 'element-plus'
+import { ElMessage, ElTree } from 'element-plus'
 import { TreeNodeData } from 'element-plus/es/components/tree/src/tree.type'
+import { load_file } from '~/func'
+
 
 declare const pywebview: any
 
 interface Tree {
     label: string
-    path?: string
+    path: string
     children?: Tree[]
 }
 
 //文件数据
-defineProps<{
+const p = defineProps<{
     data: Tree[]
+    raw: Boolean
+    modelValue: string
 }>()
 
 const filterText = ref('')
@@ -45,25 +49,21 @@ const filterNode = (value: string, data: TreeNodeData) => {
 
 // 事件声明
 var emit = defineEmits<{
-    (event: 'content_change', data: string, info: string, selection: any): void
+    (event: 'file_change', data: any, info: any, selection: any, lines: string[],bools :boolean[]): void
+    (event: 'update:modelValue', res: string): void
 }>()
 
 const handleNodeClick = async (data: Tree) => {
     // 通过判断 是否具备children属性来判断 点击的是否是文件
     if (!Reflect.has(data, 'children')) {
-        const loading = ElLoading.service({
-            lock: true,
-            text: 'Loading',
-            background: 'rgba(0, 0, 0, 0.7)',
-        })
-        var datas = await pywebview.api._get_file_content(data.path)
-        if (datas) {
-            emit('content_change', datas.content, datas.info, datas.selection)
-        }
+        var datas = await load_file(data.path, p.raw)
+        emit('update:modelValue',data.path)
+        if (datas)
+            emit('file_change', datas.content, datas.info, datas.selection, datas.lines, datas.bools)
         else {
             ElMessage.error(data.label + ' 不是一个有效的文本文件！')
-        }
-        loading.close()
+            emit('file_change', '', {}, [], [], [])
+        }   
     }
 }
 

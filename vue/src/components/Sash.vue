@@ -9,12 +9,12 @@ import { throttle } from '~/func'
 // props透传
 var props = defineProps<{
     location: string
-    width: number
+    modelValue: number
 }>()
 
 // 事件声明
 var emit = defineEmits<{
-    (event: 'attribute_change', value: number): void
+    (event: 'update:modelValue', value: number): void
 }>()
 
 var style = {
@@ -36,7 +36,6 @@ else if (props.location == 'left' || props.location == 'right') {
     style.width = "8px"
     style.height = "100%"
 }
-
 var on_show = true
 // 父控件的width
 var width = 0
@@ -47,7 +46,7 @@ var start = 0
 const send = (event: MouseEvent) => {
     var shifting = 0
     var res = 0
-    var edge = 6
+    var edge = 8
     if (X)
         shifting = event.clientX - start
     else
@@ -60,7 +59,7 @@ const send = (event: MouseEvent) => {
     // 使之还能被拖出
     if (res < edge)
         res = edge
-    emit('attribute_change', res)
+    emit('update:modelValue', res)
 }
 
 const th_send = throttle(send, 10)
@@ -78,7 +77,7 @@ const mousedown = (event: MouseEvent) => {
         start = event.clientY
 
     // 记录改变开始时的width
-    width = props.width
+    width = props.modelValue
     window.addEventListener('mousemove', mousemove);
     window.addEventListener('mouseup', mouseup);
 }

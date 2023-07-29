@@ -1,101 +1,252 @@
 <template>
   <r-app-menu>
-    <Menu :info="info" @project_change="project_change"></Menu>
+    <Menu :info="info" :file_path="file_path" @folder_change="(data) => { file_data = data; init()}" @menu_click="handle_menu_click"></Menu>
   </r-app-menu>
 
   <l-navigation-drawer :style="slider_style">
-    <TreeView :data="file_data" @content_change="content_change"></TreeView>
-    <Sash location="right" :width="slider_width" @attribute_change="slider_change" />
+    <TreeView 
+      v-model="abs_file_path"
+      :raw="raw" 
+      :data="file_data" 
+      @file_change="file_change">
+    </TreeView>
+    <Sash location="right" v-model="slider_width" />
   </l-navigation-drawer>
 
   <r-navigation-drawer :style="operate_style">
-    <Opreate />
-    <Sash location="left" :width="operate_width"  @attribute_change="operate_change" />
+    <Opreate 
+      @handle_click="handle_click" 
+      :original_text="original_text" 
+      :line_count="line_count" 
+      :position="position + 1"
+      :loading="translate_loading"
+      :raw="raw"
+      v-model="translated_text" 
+    />
+    <Sash location="left" v-model="operate_width" />
   </r-navigation-drawer>
-  
-  <main :style="main_style">
-    <MainPage :content="content" :selections="selections"></MainPage>
-  </main>
+
+  <main id="editorContainer" :style="main_style"></main>
 </template>
 
 <script lang="ts" setup>
 import Sash from '../components/Sash.vue';
-import MainPage from '../layouts/MainPage.vue';
 import Menu from '../layouts/Menu.vue'
 import TreeView from '../layouts/TreeView.vue';
 import Opreate from '../layouts/Opreate.vue';
-import { ref,watch,reactive } from 'vue';
-import { global_config,set_global_config,func_with_pywebview } from '~/func'
+import { ref, watch, computed, onMounted } from 'vue';
+import { global_config, set_global_config, func_with_pywebview, reactive_with_watch, throttle, debounce, load_file, put_message } from '~/func'
+import { initEditor, decorate_selections, to_selections } from '~/monaco_editor';
+import * as monaco from 'monaco-editor'
+
+declare const pywebview: any
 
 // 初始宽度
-var slider_width = ref(320)
-var operate_width = ref(320)
+const slider_width = ref(320)
+const operate_width = ref(320)
 
 func_with_pywebview(() => {
   // 读取配置
-  global_config('slider_width',(res:number)=>{
+  global_config('slider_width', (res: number) => {
     slider_width.value = res
   })
 
-  global_config('operate_width',(res:number)=>{
+  global_config('operate_width', (res: number) => {
     operate_width.value = res
   });
 })
 
-var main_style = reactive({
-  left: slider_width.value + 'px',
-  right: operate_width.value + 'px',
+const main_style = reactive_with_watch({
+  left: computed(() => slider_width.value + 'px'),
+  right: computed(() => operate_width.value + 'px')
 })
 
-var slider_style = reactive({
-  width: slider_width.value + 'px'
+const slider_style = reactive_with_watch({
+  width: computed(() => slider_width.value + 'px')
 })
 
-var operate_style = reactive({
-  width: operate_width.value + 'px',
+const operate_style = reactive_with_watch({
+  width: computed(() => operate_width.value + 'px')
 })
 
 // 监视变化，更新相关属性。
+watch(slider_width, () => set_global_config('slider_width', slider_width.value))
+watch(operate_width, () => set_global_config('operate_width', operate_width.value))
 
-watch(slider_width, () => {
-  var p = slider_width.value + 'px';
-  main_style.left = p
-  slider_style.width = p
-  set_global_config('slider_width',slider_width.value)
-});
+// 全局
+var editor: monaco.editor.IStandaloneCodeEditor
 
-watch(operate_width, () => {
-  var p = operate_width.value + 'px';
-  main_style.right = p
-  operate_style.width = p
-  set_global_config('operate_width',operate_width.value)
-});
+onMounted(() => {
+  const editorContainer = document.getElementById('editorContainer')
+  if (editorContainer)
+    // 创建Monaco_editor
+    editor = initEditor(editorContainer)
+})
 
+// 文件树信息
+const file_data = ref([])
 
-const slider_change = (width: number) => {
-  slider_width.value = width
+const info = ref({})
+const abs_file_path = ref('')
+const file_path = ref('')
+const original_text = ref('')
+const translated_text = ref('')
+const line_count = ref(0)
+const translate_loading = ref(false)
+const raw = ref(false)
+
+var position = -1
+var lines: string[] = []
+var selections: Array<monaco.Selection> = []
+var decorations: Array<{ range: any, options: any }> = []
+var decorationsCollection: monaco.editor.IEditorDecorationsCollection
+
+const init = () => {
+  editor.setValue('')
+  position = -1
+  original_text.value = ''
+  translated_text.value = ''
+  file_path.value = ''
 }
-const operate_change = (width: number) => {
-  operate_width.value = width
-}
 
-// 收取文件夹选择回调，并获取文件夹下的所有文件信息
-var file_data = ref([])
-const project_change = (data:any) => {
-  file_data.value = data
-}
+const file_change = (text: string, infomation: any, arrays: any, _lines: string[], bools: boolean[]) => {
+  if (file_path.value != infomation.Path)
+    init()
 
-var content = ref('')
-var info = ref('None')
-var selections = ref([[]])
-const content_change = (text:string,infomation:string,selection:any) => {
-  content.value = text
+  // setValue 后才能 getModel
+  editor.setValue(text)
+  const model = editor.getModel()
+  lines = _lines
+  if (model) 
+    for (let selection of selections)
+      lines.push(model.getValueInRange(selection))
+
   info.value = infomation
-  selections.value = selection
+  file_path.value = infomation.Path
+  line_count.value = arrays.length
+
+
+  if (arrays.length > 0) {
+    if (file_path.value != infomation.Path || position == -1)
+      position = 0
+    selections = to_selections(arrays)
+    decorations = decorate_selections(selections, bools)
+    decorationsCollection = editor.createDecorationsCollection(decorations)
+    flash_Position()
+  }
 }
+
+const flash_Position = throttle(() => {
+  var now_posi = editor.getPosition()
+  var posi = selections[position].getEndPosition()
+  if (now_posi && now_posi.column > posi.column) {
+    var posi = selections[position].getStartPosition()
+  }
+
+  var temp = decorations[position].options.inlineClassName
+  decorations[position].options.inlineClassName = 'InlineDecorationHighlight'
+  decorationsCollection.set(decorations)
+  decorations[position].options.inlineClassName = temp
+
+  editor.setPosition(posi)
+  editor.revealPosition(posi)
+  original_text.value = lines[position]
+  get_translation()
+},60)
+
+const get_translation = debounce(async () => {
+  translated_text.value = await pywebview.api._get_translation(original_text.value)
+},200)
+
+const edit_text = () => {
+  if (translated_text.value && translated_text.value.length > 0 && position > -1) {
+    pywebview.api._updata_translation(original_text.value,translated_text.value)
+    if (!raw.value) {
+      editor.updateOptions({ readOnly: false })
+      editor.executeEdits('user', [{ range: selections[position], text: translated_text.value }])
+      selections[position] = selections[position].setEndPosition(selections[position].endLineNumber, selections[position].startColumn + translated_text.value.length)
+      decorations[position].range = selections[position]
+      decorations[position].options.inlineClassName = 'InlineDecorationHighlight'
+      decorationsCollection.set(decorations)
+      decorations[position].options.inlineClassName = '_InlineDecoration'
+      editor.updateOptions({ readOnly: true })
+    }
+    put_message({
+      box: false,
+      message: '提交成功！',
+      level: 'success'
+    })
+  }
+  else 
+  put_message({
+      box: false,
+      message: '无法提交！',
+      level: 'error'
+    })
+}
+
+const handle_menu_click = (button: any) => {
+  switch (button) {
+    case 'this':
+      const model = editor.getModel()
+      if (model)
+        pywebview.api._create_translate_task(file_path.value,lines)
+      break
+  }
+}
+
+
+const handle_click = async (button: any) => {
+  // 当上一步报错时，解锁
+  translate_loading.value = false
+  var old_posi = position
+  switch (button) {
+    case 'change':
+      raw.value = !raw.value
+      if (position > -1) {
+        var datas = await load_file(abs_file_path.value,raw.value)
+        if (datas)
+          file_change(datas.content, datas.info, datas.selection, datas.lines, datas.bools)
+      }
+      break
+    case 'translate':
+      translate_loading.value = true
+      var res = await pywebview.api._translate(original_text.value)
+      if (position == old_posi)
+        translated_text.value = res
+      translate_loading.value = false
+      break
+    case 'back':
+      position > 0 ? position -= 1 : position
+      break
+    case 'next':
+      position < selections.length - 1 ? position += 1 : position
+      break
+    case 'submit':
+      edit_text();
+      break
+    default:
+      position = position == -1 ? -1 : button - 1
+      break
+  }
+  if (old_posi != position) flash_Position()
+}
+
 </script>
 
 <style>
+.InlineDecoration {
+  background-color: white;
+}
+
+._InlineDecoration {
+  background-color: antiquewhite;
+}
+
+.InlineDecorationHighlight {
+  background-color: gold;
+}
+
 r-app-menu {
   position: absolute;
   top: 0px;
@@ -122,6 +273,6 @@ r-navigation-drawer {
   top: 40px;
   bottom: 0px;
   right: 0px;
-  background-color:antiquewhite;
+  background-color: antiquewhite;
 }
 </style>
