@@ -1,4 +1,4 @@
-height: 950
+height: 1783
 language:
   ascii: '[\x00-\x7F]+'
   en: '[a-zA-Z]+'
@@ -10,4 +10,4 @@ path: D:\Desktop\汉化\ROOM\scenario 汉化工程
 rule: tyrano.yaml
 slider_width: 304
 translator: OpenAI
-width: 2482
+width: 3238
