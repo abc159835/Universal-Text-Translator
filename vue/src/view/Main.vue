@@ -1,6 +1,14 @@
 <template>
   <r-app-menu>
-    <Menu :info="info" :file_path="file_path" @folder_change="(data) => { file_data = data; init()}" @menu_click="handle_menu_click"></Menu>
+    <Menu 
+      :info="info" 
+      :file_path="file_path" 
+      :raw="raw"
+      @folder_change="(data) => { file_data = data; init()}" 
+      @menu_click="handle_menu_click"
+      @savefile="raw_file_save"
+    >
+    </Menu>
   </r-app-menu>
 
   <l-navigation-drawer :style="slider_style">
@@ -15,6 +23,7 @@
 
   <r-navigation-drawer :style="operate_style">
     <Opreate 
+      v-if = "position > -1"
       @handle_click="handle_click" 
       :original_text="original_text" 
       :line_count="line_count" 
@@ -34,7 +43,7 @@ import Sash from '../components/Sash.vue';
 import Menu from '../layouts/Menu.vue'
 import TreeView from '../layouts/TreeView.vue';
 import Opreate from '../layouts/Opreate.vue';
-import { ref, watch, computed, onMounted } from 'vue';
+import { ref, watch, computed, onMounted,Ref } from 'vue';
 import { global_config, set_global_config, func_with_pywebview, reactive_with_watch, throttle, debounce, load_file, put_message } from '~/func'
 import { initEditor, decorate_selections, to_selections } from '~/monaco_editor';
 import * as monaco from 'monaco-editor'
@@ -78,15 +87,15 @@ var editor: monaco.editor.IStandaloneCodeEditor
 
 onMounted(() => {
   const editorContainer = document.getElementById('editorContainer')
-  if (editorContainer)
+  if (editorContainer) {
     // 创建Monaco_editor
     editor = initEditor(editorContainer)
+  }
 })
 
 // 文件树信息
 const file_data = ref([])
-
-const info = ref({})
+const info: Ref<any> = ref({})
 const abs_file_path = ref('')
 const file_path = ref('')
 const original_text = ref('')
@@ -115,16 +124,13 @@ const file_change = (text: string, infomation: any, arrays: any, _lines: string[
 
   // setValue 后才能 getModel
   editor.setValue(text)
-  const model = editor.getModel()
+
+
   lines = _lines
-  if (model) 
-    for (let selection of selections)
-      lines.push(model.getValueInRange(selection))
 
   info.value = infomation
   file_path.value = infomation.Path
   line_count.value = arrays.length
-
 
   if (arrays.length > 0) {
     if (file_path.value != infomation.Path || position == -1)
@@ -160,13 +166,28 @@ const get_translation = debounce(async () => {
 
 const edit_text = () => {
   if (translated_text.value && translated_text.value.length > 0 && position > -1) {
-    pywebview.api._updata_translation(original_text.value,translated_text.value)
+    var translated_text_value = translated_text.value.replaceAll('\n','\t')
+    pywebview.api._updata_translation(original_text.value,translated_text_value)
     if (!raw.value) {
       editor.updateOptions({ readOnly: false })
-      editor.executeEdits('user', [{ range: selections[position], text: translated_text.value }])
-      selections[position] = selections[position].setEndPosition(selections[position].endLineNumber, selections[position].startColumn + translated_text.value.length)
+      editor.executeEdits('user', [{ range: selections[position], text: translated_text_value }])
+      var line_number = selections[position].startLineNumber
+      var offset = translated_text_value.length - selections[position].endColumn + selections[position].startColumn
+      selections[position] = selections[position].setEndPosition(line_number, selections[position].endColumn + offset)
       decorations[position].range = selections[position]
       decorations[position].options.inlineClassName = 'InlineDecorationHighlight'
+      var temp = position
+      if(selections.length > temp + 1) {
+        temp++
+        while(selections[temp].startLineNumber == line_number) {
+          selections[temp] = new monaco.Selection(line_number,selections[temp].startColumn + offset,line_number,selections[temp].endColumn + offset)
+          decorations[temp].range = selections[temp]
+          if(selections.length > temp + 1)
+            temp++
+          else
+            break
+        }
+      }
       decorationsCollection.set(decorations)
       decorations[position].options.inlineClassName = '_InlineDecoration'
       editor.updateOptions({ readOnly: true })
@@ -186,12 +207,37 @@ const edit_text = () => {
 }
 
 const handle_menu_click = (button: any) => {
-  switch (button) {
+  switch (button.file) {
     case 'this':
-      const model = editor.getModel()
-      if (model)
-        pywebview.api._create_translate_task(file_path.value,lines)
+      if (position > -1) {
+        pywebview.api._create_translate_task(file_path.value,lines,button.history)
+        return
+      }
       break
+    case 'all':
+      if (file_data.value.length > 0) {
+        pywebview.api._create_translate_all_task(file_data.value,button.history)
+        return
+      }
+      break
+  }
+  put_message({
+    box: false,
+    message: '无效操作',
+    level: 'error'
+  })
+}
+
+const raw_file_save = () => {
+  if (abs_file_path.value.length > 0 && raw.value) {
+    var model = editor.getModel()
+    if (model)
+      pywebview.api._save_file(abs_file_path.value,model.getValue(),info.value.Encoding)
+    put_message({
+      box: false,
+      message: '已保存更改！',
+      level: 'success'
+    })
   }
 }
 
@@ -203,6 +249,7 @@ const handle_click = async (button: any) => {
   switch (button) {
     case 'change':
       raw.value = !raw.value
+      editor.updateOptions({ readOnly: !raw.value })
       if (position > -1) {
         var datas = await load_file(abs_file_path.value,raw.value)
         if (datas)

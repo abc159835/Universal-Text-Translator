@@ -15,6 +15,7 @@ class Task:
         self.result = None
         self.args = args
         self.callback = Task._call_back
+        self.strat_callback = Task._call_back
 
     def _call_back(self):
         pass
@@ -65,19 +66,26 @@ class Taskhelper:
         while True:
             task_id = self.task_queue.get()
             task:Task = self.tasks.get(task_id)
-            if task.cancel == False:
-                task.run()
-                task.wait_to_get_result()
-                task.callback(task)
+            Taskhelper.run_task(task)
+
+    def run_task(task: Task):
+        if task.cancel == False:
+            task.strat_callback(task)
+            task.run()
+            task.wait_to_get_result()
+            task.callback(task)
 
 
-    def create_task(self, task:Task):
+    def create_task(self, task:Task, start_now = False):
         # 创建一个新的任务，并将其添加到字典中
         if self.tasks.get(task.name):
             return False
         else:
             self.tasks[task.name] = task
-            self.task_queue.put(task.name)
+            if start_now:
+                Taskhelper.run_task(task)
+            else:
+                self.task_queue.put(task.name)
             return True
 
     def _cancel_task(self, name):
@@ -100,13 +108,23 @@ class Taskhelper:
 
     def _get_all_tasks_status(self):
         # 获取所有任务的状态，返回一个列表，每个元素是一个元组，包含 name，进度，信息
-        status_list = []
+        active_list = []
+        disactive_list = []
         for name, task in self.tasks.items():
-            status_list.append({
-                'name':name, 
-                'progress':task.progress,
-                'info':task.info,
-                'end_progress': task.end_progress
-            })
-        return status_list
+            if task.progress > 0:
+                active_list.append({
+                    'name':name, 
+                    'progress':task.progress,
+                    'info':task.info,
+                    'end_progress': task.end_progress
+                })
+            else:
+                disactive_list.append({
+                    'name':name, 
+                    'progress':task.progress,
+                    'info':task.info,
+                    'end_progress': task.end_progress
+                })
+        active_list.extend(disactive_list)
+        return active_list
     

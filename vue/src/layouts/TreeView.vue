@@ -57,12 +57,12 @@ const handleNodeClick = async (data: Tree) => {
     // 通过判断 是否具备children属性来判断 点击的是否是文件
     if (!Reflect.has(data, 'children')) {
         var datas = await load_file(data.path, p.raw)
-        emit('update:modelValue',data.path)
-        if (datas)
+        if (datas) {
             emit('file_change', datas.content, datas.info, datas.selection, datas.lines, datas.bools)
+            emit('update:modelValue',data.path)
+        }
         else {
             ElMessage.error(data.label + ' 不是一个有效的文本文件！')
-            emit('file_change', '', {}, [], [], [])
         }   
     }
 }

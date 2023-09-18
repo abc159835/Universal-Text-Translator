@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { func_with_pywebview } from '~/func';
-import { onActivated, ref, watch } from 'vue';
+import { onActivated, ref, watch, getCurrentInstance } from 'vue';
 import { ElSelect,ElMessage } from 'element-plus';
 import Config from '~/components/Config.vue';
 
@@ -49,7 +49,7 @@ var translator_config = ref({})
 var rule = ref('')
 var translator = ref('')
 
-onActivated(() => {
+const updata = () => {
     func_with_pywebview(async () => {
         rule.value = await pywebview.api._global_config("rule")        
         translator.value = await pywebview.api._global_config('translator')
@@ -59,6 +59,16 @@ onActivated(() => {
         config.value = await pywebview.api._global_config(null)
         translator_config.value = await pywebview.api._get_translator_config(translator.value)
     })
+}
+
+const instance = getCurrentInstance()
+if (instance) {
+    const bus = instance.appContext.config.globalProperties.$bus
+    bus.on('SettingUpdata',updata)
+}
+
+onActivated(() => {
+    updata()
 })
 
 watch(translator,async () => {

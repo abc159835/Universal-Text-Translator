@@ -68,7 +68,12 @@ def translator_change():
     translator_name = _global_config('translator')
     if translator_name != None:
         _module = import_module(PATH.joinpath(f'plugins\Translator\{translator_name}\main.py'))
-        translator = getattr(_module,'Translator')
+        try:
+            translator = getattr(_module,'Translator')
+        except:
+            translate_func = getattr(_module,'translate')
+            translator = get_translator(translate_func)
+
         translator_init()
 
 def _updata_translation(origin, text):
@@ -81,9 +86,17 @@ def _get_translation(origin):
 
 
 def finish_callback(t: Task):
-    if t.result:
-        for key in t.result:
-            translate_dict[key] = t.textparser.fix_after([t.result[key]])[0]
+    from module.pywebview import Error
+    if t.result == t.uuid:
+        return
+    try:
+        if t.result:
+            values = list(t.result.values())
+            values = t.textparser.fix_after(values)
+            for c in range(len(values)):
+                translate_dict[t.res_backup[c]] = values[c]
+    except:
+        Error()
 
 
 def _translate(line: str):
@@ -92,22 +105,120 @@ def _translate(line: str):
     line = textParser.fix_before([line])[0]
     t_line = t.main([line])[line]
     line = textParser.fix_after([t_line])[0]
-    return line
+    return line.replace('\n','\t')
 
 
-def _create_translate_task(name, strs):
-    from module.OShelper import textParser,put_message
+def _create_translate_all_task(file_data, useTrans = True):
+    from module.OShelper import put_message
+    name = '查找所有可预翻译文本'
 
-    mytextParser = copy.deepcopy(textParser)
-    strs = mytextParser.fix_before(strs)
-
-    t: Task = translator(strs)
+    t: Task = TranslateALL(file_data, useTrans)
     t.name = name
     t.info = '等待中...'
-    t.textparser = mytextParser
+
+    if task_helper.create_task(task = t, start_now=True):
+        put_message('success',f'任务: {name} 创建成功！')
+    else:
+        put_message('error',f'任务: {name} 已经存在！')
+
+
+def preTranslate(strs: list[str]):
+    new_strs = []
+    for _str in strs:
+        if not translate_dict.get(_str):
+            new_strs.append(_str)
+    return new_strs
+
+
+def start_callback(self: Task):
+    from module.OShelper import textParser
+    if self.args[1]:
+        strs = preTranslate(self.args[0])
+    else:
+        strs = self.args[0]
+    mytextParser = copy.deepcopy(textParser)
+    strs = mytextParser.fix_before(strs)
+    self.textparser = mytextParser
+    # 元组中只包含一个元素时，需要在元素后面添加逗号
+    self.args = (strs,)
+
+
+def _create_translate_task(name, strs: list[str], useTrans = True):
+    from module.OShelper import put_message
+    
+    if useTrans:
+        strs = preTranslate(strs)
+
+    if len(strs) == 0:
+        put_message('warning',f'{name} 没有需要翻译的文本！')
+        return
+
+    t: Task = translator(strs, useTrans)
+    t.name = name
+    t.info = '等待中...'
+    # 用于保存fix_before 之前的数据
+    t.res_backup = copy.deepcopy(strs)
     t.callback = finish_callback
+    t.strat_callback = start_callback
 
     if task_helper.create_task(task = t):
         put_message('success',f'翻译任务: {name} 创建成功！')
     else:
         put_message('error',f'翻译任务: {name} 已经存在！')
+
+
+class TranslateALL(Task):
+    def find_file(self,Trees):
+        self.end_progress += len(Trees)
+        for tree in Trees:
+            if 'children' in tree:
+                self.end_progress -= 1
+                for file in self.find_file(tree['children']):
+                    yield file
+            else:
+                yield tree['path']
+
+
+    def main(self, file_data, useTrans = True):
+        from module.OShelper import _get_file_content, textParser
+        self.end_progress = 0
+        mytextParser = copy.deepcopy(textParser)
+        for file_path in self.find_file(file_data):
+            datas = _get_file_content(file_path, False, mytextParser)
+            if datas and datas['info']['Find'] > 0:
+                if self.cancel:
+                    return
+                rel_path = datas['info']['Path']
+                self.info = rel_path
+                if useTrans:
+                    datas['lines'] = preTranslate(datas['lines'])
+                if len(datas['lines']) > 0:
+                    _create_translate_task(rel_path, datas['lines'], False)
+            self.progress += 1
+
+
+def get_translator(translate_func):
+    class Translator(Task):
+        def main(self, lines: list[str]):
+            # 设置任务终点
+            self.end_progress = len(lines)
+
+            res = {}
+            Generator = translate_func(lines)
+            for line in lines:
+                # 检查任务是否被用户取消，销毁线程
+                if self.cancel:
+                    return
+
+                # 传递当前翻译目标信息
+                self.info = line
+
+                _line = next(Generator)
+                res[line] = _line
+
+                # 前进度加 1
+                self.progress += 1
+
+            return res
+        
+    return Translator

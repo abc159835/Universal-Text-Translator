@@ -7,11 +7,13 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler,FileModifiedEvent
 from module.debounce import debounce
 from pathlib import Path
+from threading import Thread
 import pyperclip
 import queue
 import win32api, win32con
 import yaml
 import shutil
+import time
 import chardet
 import os
 
@@ -49,6 +51,10 @@ def init():
     config_observer.schedule(FileHandler(),PATH.joinpath('plugins'),recursive=True)
     config_observer.start()
 
+    auto_save_thread = Thread(target=auto_save)
+    auto_save_thread.daemon = True
+    auto_save_thread.start()
+
     message_queue = queue.Queue()
 
     Parser_init()
@@ -70,6 +76,12 @@ def Parser_init():
 
 def _get_translator_config(translator_name):
     return read_config(None, PATH.joinpath(f'plugins\Translator\{translator_name}\config.yaml'))
+
+
+def auto_save():
+    while True:
+        translate_dict_save(_global_config('path'))
+        time.sleep(40)
 
 
 def _get_message():
@@ -134,8 +146,10 @@ def creata_file_path(file_path):
         win32api.SetFileAttributes(str(file_path.parent), win32con.FILE_ATTRIBUTE_HIDDEN)
 
 
-def _get_file_content(path, useTrans = False):
-    global textParser
+def _get_file_content(path, useTrans = False, mytextParser = None):
+    if mytextParser is None:
+        global textParser
+        mytextParser = textParser
     root_path = _global_config('path')
     relative_path = os.path.relpath(path,root_path)
     data = {'content': '', 'info': {'Encoding': 'UTF-8'}}
@@ -155,7 +169,7 @@ def _get_file_content(path, useTrans = False):
         except:
             return None
 
-    data['selection'],data['content'],data['lines'] = textParser.parser(data['content'].split('\n'))
+    data['selection'],data['content'],data['lines'] = mytextParser.parser(data['content'].split('\n'))
 
     if useTrans:
         data['selection'],data['content'],data['bools'] = TextParser.translate(data['selection'], data['content'])
@@ -169,8 +183,8 @@ def _get_file_content(path, useTrans = False):
     data['info']['Line'] = len(data['content'].split('\n'))
 
     from module.Translate import export_list
-    if path not in export_list and find > 0:
-        export_list.append(path)
+    if relative_path not in export_list and find > 0:
+        export_list.append(relative_path)
 
     return data
 
@@ -214,6 +228,11 @@ def dump_config(config,path):
     yaml.dump(config, open(path,'w', encoding='utf-8'), allow_unicode=True)
 
 
+def _save_file(path,content,encoding):
+    with open(path,'w',encoding=encoding) as f:
+        f.write(content)
+
+
 def read_config(name, path, error_return = {},onlyfirst = False):
     config = yaml.load(open(path, 'r', encoding='utf-8'),Loader=yaml.FullLoader)
     if name == None:
@@ -235,7 +254,7 @@ def _create_export_task(path):
     from module.Translate import task_helper
     ef = export_folder(path)
     ef.name = path
-    if task_helper.create_task(task = ef):
+    if task_helper.create_task(task = ef, start_now = True):
         put_message('success',f'导出任务: {path} 创建成功！')
     else:
         put_message('error',f'导出任务: {path} 已经存在！')
@@ -245,11 +264,12 @@ class export_folder(Task):
     def main(self, path):
         from module.Translate import export_list
         self.end_progress = len(export_list)
+        rootpath = _global_config('path')
         for file in export_list:
             if self.cancel:
                 return
             self.info = file
-            data = _get_file_content(file)
+            data = _get_file_content(Path(rootpath).joinpath(file), useTrans=True)
             if data['info']['Find'] > 0:
                 with open(Path(path).joinpath(data['info']['Path']),mode='w',encoding=data['info']['Encoding']) as f:
                     f.write(data['content'])

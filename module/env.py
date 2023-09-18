@@ -4,6 +4,7 @@ from pathlib import Path
 def env():
     return True if Path(__file__).exists() else False
 
+
 if env():
     PATH = Path(__file__).parent.parent.joinpath('dist')
 else:

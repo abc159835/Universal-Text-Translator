@@ -53,7 +53,7 @@ export const func_with_pywebview = (func: Function) => {
 }
 
 import { ElLoading, ElMessage, ElMessageBox } from "element-plus";
-import { watch, reactive, isRef, Ref } from "vue"
+import { watch, reactive, isRef, Ref, getCurrentInstance } from "vue"
 export const reactive_with_watch = (object: { [key: string]: any | Ref<any> }) => {
     for (const [key, value] of Object.entries(object)) {
         if (isRef(value)) {
@@ -64,37 +64,29 @@ export const reactive_with_watch = (object: { [key: string]: any | Ref<any> }) =
     return reactive(object) // 返回响应式对象
 }
 
-
-func_with_pywebview(async () => {
-    while (true) {
-      const Message = await pywebview.api._get_message()
-      put_message(Message)
-    }
-  })
-
 export const put_message = (Message: any) => {
     if (Message.box)
         ElMessageBox.confirm(Message.message, 'SYSTEM', {
-          confirmButtonText: 'Copy',
-          type: Message.level,
+            confirmButtonText: 'Copy',
+            type: Message.level,
         }).then(() => {
-          pywebview.api._copy(Message.message)
+            pywebview.api._copy(Message.message)
         })
-      else
+    else
         ElMessage({
-          showClose: true,
-          message: Message.message,
-          type: Message.level
+            showClose: true,
+            message: Message.message,
+            type: Message.level
         })
 }
 
-export const load_file = async (path: string ,raw :Boolean) => {
+export const load_file = async (path: string, raw: Boolean) => {
     const loading = ElLoading.service({
         lock: true,
         text: 'Loading',
         background: 'rgba(0, 0, 0, 0.7)',
     })
-    var datas = await pywebview.api._get_file_content(path,!raw)
+    var datas = await pywebview.api._get_file_content(path, !raw)
     loading.close()
     return datas
-  }
+}

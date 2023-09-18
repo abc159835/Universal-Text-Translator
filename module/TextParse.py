@@ -75,6 +75,15 @@ def find(value, _str):
     for new_str,start,end in finditer(relist_to_str(value), _str):
         yield new_str,start,end
 
+@register('try-find')
+def find(value, _str):
+    find = False
+    for new_str,start,end in finditer(relist_to_str(value), _str):
+        find = True
+        yield new_str,start,end
+    if not find:
+        yield _str, 0, len(_str)
+
 
 @register('include')
 def include(value, _str):
@@ -105,8 +114,12 @@ class TextParser:
     def __init__(self, rule={}) -> None:    
         rules =  rule.get('step')
         fixs = rule.get('fix')
+        fixs_after = rule.get('fix_after')
+        fixs_before = rule.get('fix_before')
         self.rules = []
         self.fixs = {}
+        self.fixs_after = {}
+        self.fixs_before = {}
 
         if rules != None:
             # 尝试使用预设的正则替换关键字
@@ -129,6 +142,12 @@ class TextParser:
 
         if fixs != None:
             self.fixs = fixs
+
+        if fixs_before != None:
+            self.fixs_before = fixs_before
+
+        if fixs_after != None:
+            self.fixs_after = fixs_after
 
 
 
@@ -250,11 +269,11 @@ class TextParser:
             if old_row != row:
                 offset = 0
                 old_row = row
-            origin = lines[row - 1][start - 1: end - 1]
+            origin = lines[row - 1][offset + start - 1:offset + end - 1]
             text = translate_dict.get(origin)
             _start = offset + start
             if text:
-                lines[row - 1] = lines[row - 1][:offset + start - 1] + text + lines[row - 1][offset + end - 1:]
+                lines[row - 1] = lines[row - 1][:offset + start - 1] + text.replace('\n','\t') + lines[row - 1][offset + end - 1:]
                 offset += len(text) - len(origin)
                 translate_bool.append(True)
             else:
@@ -273,20 +292,42 @@ class TextParser:
                     _str_list.append(_str)
                     strs[c] = strs[c][:offset + start] + value + strs[c][offset + end:]
                     offset += len(value) - len(_str)
+                Str = strs[c]
+                offset = 0
+            
             self.fix_list.append(_str_list)
+
+            for key,value in self.fixs_before.items():
+                for _str, start, end in finditer(pattern=key, line=Str):
+                    strs[c] = strs[c][:offset + start] + value + strs[c][offset + end:]
+                    offset += len(value) - len(_str)
+                Str = strs[c]
+                offset = 0
+
         return strs
 
     def fix_after(self, strs: list[str]):
         for c in range(len(strs)):
             Str = strs[c]
+            _str_list = self.fix_list[c]
+            count = 0
             for _, value in self.fixs.items():
-                for _str_list in self.fix_list:
-                    count = Str.count(value)
-                    if count == len(_str_list):
-                        count = 0
-                        offset = 0
-                        for _, start, end in finditer(pattern=value, line=Str):
-                            strs[c] = strs[c][:offset + start] + _str_list[count] + strs[c][offset + end:]
-                            offset += len(_str_list[count]) - len(value)
-                            count += 1
+                count += Str.count(value)
+            if count == len(_str_list):
+                count = 0
+                offset = 0
+                for _, value in self.fixs.items():
+                    for _, start, end in finditer(pattern=value, line=Str):
+                        strs[c] = strs[c][:offset + start] + _str_list[count] + strs[c][offset + end:]
+                        offset += len(_str_list[count]) - len(value)
+                        count += 1
+                    Str = strs[c]
+                    offset = 0
+            
+            for key,value in self.fixs_after.items():
+                for _str, start, end in finditer(pattern=key, line=Str):
+                    strs[c] = strs[c][:offset + start] + value + strs[c][offset + end:]
+                    offset += len(value) - len(_str)
+                Str = strs[c]
+                offset = 0
         return strs

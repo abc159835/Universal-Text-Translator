@@ -1,8 +1,7 @@
 step:
-  - find: 「(.*)」
+  - find: \"(.*?)\"
   - include:
-    - zh
-    - jp
+    - en
   - convert: t2s
 
 fix:

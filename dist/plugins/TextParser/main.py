@@ -1,13 +1,13 @@
-
-
 from module.TextParse import register
 import opencc
+
 
 def init():
     global S_convert
     global T_convert
     T_convert = opencc.OpenCC('t2s.json')
     S_convert = opencc.OpenCC('s2t.json')
+
 
 @register('convert')
 def convert(value,_str):

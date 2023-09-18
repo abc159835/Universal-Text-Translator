@@ -22,7 +22,18 @@
 </template>
 
 <script lang="ts" setup>
+import { func_with_pywebview, put_message } from './func'
 
+declare const pywebview: any
+
+func_with_pywebview(async () => {
+  while (true) {
+    const Message = await pywebview.api._get_message()
+    put_message(Message)
+    // if (Message.message.search('Detect') != -1)
+    //   bus.emit('SettingUpdata')
+  }
+})
 </script>
 
 <style>

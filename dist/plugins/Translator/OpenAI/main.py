@@ -1,21 +1,20 @@
-
-
 from pathlib import Path
 from module.OShelper import read_config
-from module.Task import Task
 import openai
 import time
+import json
 
 def init():
-    global model, temperature, prompt
+    global model, temperature, prompt, top_p
 
     config_path = Path(__file__).parent.joinpath('config.yaml')
 
-    openai.api_base = ' https://openkey.cloud/v1'
+    # openai.api_base = ' https://openkey.cloud/v1'
     openai.api_key = read_config('API-KEY',config_path)
 
     model = read_config('model',config_path,onlyfirst=True)
     temperature = read_config('temperature',config_path,onlyfirst=True)
+    top_p = read_config('top_p',config_path,onlyfirst=True)
     prompt = read_config('prompt',config_path)
     
 
@@ -23,39 +22,57 @@ def generate_answer(messages):
     response = openai.ChatCompletion.create(
         model = model,
         messages = messages,
-        temperature = temperature
+        temperature = temperature,
+        top_p = top_p
     )
     content = response['choices'][0]['message']['content']
     return content
 
-class Translator(Task):
-    def main(self, lines: list[str]):
-        # 设置任务终点
-        self.end_progress = len(lines)
+def retry(mes):
+    from module.pywebview import Error
+    try:
+        _line = generate_answer(mes)
+    except:
+        Error()
+        time.sleep(1)
+        _line = retry(mes)
+    return _line
 
-        res = {}
-        for c in range(len(lines)):
-            # 检查任务是否被用户取消，销毁线程
-            if self.cancel:
-                return
-            
-            line = lines[c]
+def split_list(lst, n):
+    return (lst[i:i+n] for i in range(0,len(lst),n))
 
-            # 传递当前翻译目标信息
-            self.info = line
+# """
+# 多行文本翻译尝试
+# """
+# def translate(lines: list[str]):
+#     for _lines in split_list(lines,12):
+#         count = len(_lines)
 
-            # messages = [
-            #     {'role':'system','content':prompt},
-            #     {'role':'user','content':line}
-            # ]
-            # lines[c] = generate_answer(messages)
+#         messages = [
+#             {'role':'system','content':prompt},
+#             {'role':'user','content':json.dumps(_lines,ensure_ascii=False)}
+#         ]
+        
+#         _lines = []
+#         while len(_lines) != count:
+#             res = retry(messages)
+#             print(res)
+#             try:
+#                 _lines = json.loads(res)
+#             except:
+#                 pass
 
-            # 模拟翻译请求API
-            time.sleep(0.1)
+#         for _line in _lines:
+#             yield _line
 
-            res[line] = line
-
-            # 前进度加 1
-            self.progress += 1
-
-        return res
+"""
+逐行文本翻译
+"""
+def translate(lines: list[str]):
+    for _line in lines:
+        messages = [
+            {'role':'system','content':prompt},
+            {'role':'user','content':_line}
+        ]
+        res = retry(messages)
+        yield res
