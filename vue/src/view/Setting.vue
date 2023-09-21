@@ -1,10 +1,10 @@
 <template>
     <div id="setting_background">
         <el-scrollbar class="box-card">
-            <el-card style="width: 757px;">
+            <el-card>
                 <template #header>
                     <div class="card-header">
-                        <span style="font-size: larger;">全局设置</span>
+                        <span>全局设置</span>
                         <el-button class="button" type="success" @click="save">Save</el-button>
                     </div>
                 </template>
@@ -99,7 +99,7 @@ const save = () => {
     left: 0px;
     right: 0px;
     bottom: 0px;
-    background-color: aquamarine;
+    background-color: antiquewhite;
     display: flex;
     align-items: center;
     justify-content: center;

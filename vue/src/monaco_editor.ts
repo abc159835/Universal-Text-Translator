@@ -43,7 +43,8 @@ export const initEditor = (element: HTMLElement) => {
     monaco.editor.setTheme("myTheme");
     const editor = monaco.editor.create(element, {
         automaticLayout: true,
-        readOnly: true
+        readOnly: true,
+        wordWrap: 'on'
     })
     return editor
 }

@@ -1,8 +1,0 @@
-step:
-  - find: \"(.*?)\"
-  - include:
-    - en
-  - convert: t2s
-
-fix:
-  \%.*?\%: ABC

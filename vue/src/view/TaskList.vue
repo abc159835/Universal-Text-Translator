@@ -5,7 +5,7 @@
                 <template #header>
                     <span>任务状态</span>
                 </template>
-                <el-card class="mb-3" v-if="tasks.length > 0" v-for="task in tasks" style="width: 757px;">
+                <el-card class="mb-3" v-if="tasks.length > 0" v-for="task in tasks">
                     <el-descriptions :column="1" >
                         <template #title>
                             <div class="container">

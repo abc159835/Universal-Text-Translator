@@ -1,13 +1,12 @@
 from module.network import app
 from module.env import PATH
 from module.debounce import debounce
+import module.module
 import module.TextParse
 import module.OShelper
 import module.pywebview
 import module.Translate
 import webview
-import openai
-import opencc
 
 
 init_func = []

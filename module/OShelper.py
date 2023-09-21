@@ -7,13 +7,10 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler,FileModifiedEvent
 from module.debounce import debounce
 from pathlib import Path
-from threading import Thread
 import pyperclip
 import queue
 import win32api, win32con
 import yaml
-import shutil
-import time
 import chardet
 import os
 
@@ -41,6 +38,7 @@ def init():
     global global_configs
     global config_observer
     global message_queue
+    global save_lock
 
     global_configs = read_config(None,PATH.joinpath('global_config.yaml'))
     translator_list_init()
@@ -51,9 +49,9 @@ def init():
     config_observer.schedule(FileHandler(),PATH.joinpath('plugins'),recursive=True)
     config_observer.start()
 
-    auto_save_thread = Thread(target=auto_save)
-    auto_save_thread.daemon = True
-    auto_save_thread.start()
+    # auto_save_thread = Thread(target=auto_save)
+    # auto_save_thread.daemon = True
+    # auto_save_thread.start()
 
     message_queue = queue.Queue()
 
@@ -72,16 +70,20 @@ def Parser_init():
     # 初始化提取器
     global textParser
     textParser = TextParser(read_config(None,PATH.joinpath('plugins\TextParser\{}'.format(_global_config('rule'))),error_return={}))
-    
+   
 
 def _get_translator_config(translator_name):
     return read_config(None, PATH.joinpath(f'plugins\Translator\{translator_name}\config.yaml'))
 
 
-def auto_save():
-    while True:
-        translate_dict_save(_global_config('path'))
-        time.sleep(40)
+def save():
+    translate_dict_save(_global_config('path'))
+
+
+# def auto_save():
+#     while True:
+#         save()
+#         time.sleep(40)
 
 
 def _get_message():

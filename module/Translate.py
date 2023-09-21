@@ -1,7 +1,10 @@
 from module.env import PATH
 from module.Task import Task, Taskhelper
 from pathlib import Path
+from threading import Thread, Lock
+from module.debounce import debounce
 import json
+import os
 import copy
 import importlib.util
 
@@ -10,6 +13,13 @@ translator:Task = None
 task_helper = Taskhelper()
 translate_dict = {}
 export_list = []
+save_lock = Lock()
+
+def init():
+    global debounce_save
+    from module.OShelper import save
+    debounce_save = debounce(2)(save)
+
 
 def json_init(rootpath, path, json_object):
     if rootpath and Path(rootpath).joinpath(path).exists():
@@ -22,7 +32,9 @@ def json_save(rootpath, path, json_object):
     if rootpath and len(json_object) > 0:
         creata_file_path(Path(rootpath).joinpath(path))
         with open(Path(rootpath).joinpath(path),'w',encoding='utf-8') as f:
+            save_lock.acquire()
             json.dump(json_object, f, ensure_ascii = False,indent=4)
+            save_lock.release()
 
 
 def translate_dict_init(path):
@@ -32,15 +44,24 @@ def translate_dict_init(path):
     export_list = json_init(path,'UTT/export.json',[])
 
 
-def translate_dict_save(path):
+def translate_dict_save(path: str):
     global translate_dict
     global export_list
+
+    back_up = Path(path).joinpath('UTT/backup_data.json')
+    data = Path(path).joinpath('UTT/data.json')
+    if back_up.exists():
+        os.remove(back_up)
+    if data.exists():
+        os.rename(data,back_up)
+    
     json_save(path,'UTT/data.json',translate_dict)
     json_save(path,'UTT/export.json',export_list)
 
+
 def close():
-    from module.OShelper import _global_config
-    translate_dict_save(_global_config('path'))
+    from module.OShelper import save
+    save()
 
 
 def import_module(module_path):
@@ -78,7 +99,10 @@ def translator_change():
 
 def _updata_translation(origin, text):
     global translate_dict
+    global debounce_save
     translate_dict[origin] = text
+    debounce_save()
+
 
 def _get_translation(origin):
     global translate_dict

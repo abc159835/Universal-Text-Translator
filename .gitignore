@@ -1,6 +1,6 @@
-/dist/Application
+/dist
 /build
 /old
 /vue/dist
-/UTT
+/UTT/Application
 /hooks
