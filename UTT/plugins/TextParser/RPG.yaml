@@ -1,5 +1,0 @@
-step:
-  - find: \"(.*?)\"
-  - include:
-    - jp
-    - zh

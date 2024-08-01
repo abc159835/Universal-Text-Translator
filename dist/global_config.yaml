@@ -6,8 +6,8 @@ language:
   number: '[0-9]+'
   zh: '[\u4e00-\u9fa5]+'
 operate_width: 273
-path: C:\Users\abc15\Desktop\ProjectAF - (あまえんぼ冬)ver1.00\www\data
+path: 
 rule: RPG.yaml
-slider_width: 285
-translator: OpenAI
-width: 3172
+slider_width: 280
+translator: _Dump
+width: 3170

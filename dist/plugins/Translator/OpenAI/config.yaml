@@ -1,20 +1,23 @@
-API-KEY: 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
+API-KEY: sk-RKkNaNsRBKZCt0v4GiLAk9gRoGYs3uZrBok3XZailtg5F234
 model:
-- gpt-3.5-turbo
+- sukinishiro
 - - gpt-3.5-turbo
   - gpt-4
   - gpt-3.5-turbo-0613
-prompt: You are an expert translator, translate directly without explanation. Please
-  edit the following sentences in Simplified Chinese to improve clarity, conciseness,
-  and coherence, making them match the expression of native speakers.
+  - gpt-4o
+  - claude-3-haiku-20240307
+  - claude-3-5-sonnet-20240620
+  - sukinishiro
+prompt: 'You are a translator, translate the following content into Simplified Chinese
+  directly without explanation. Translate the following content:'
 temperature:
-- 1
+- 0.1
 - max: 2
   min: 0
   step: 0.1
 top_p:
-- 1
+- 0.3
 - max: 2
   min: 0
   step: 0.1
-wait_time: 20
+wait_time: 0

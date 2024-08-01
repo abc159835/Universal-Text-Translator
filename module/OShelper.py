@@ -154,7 +154,7 @@ def _get_file_content(path, useTrans = False, mytextParser = None):
         mytextParser = textParser
     root_path = _global_config('path')
     relative_path = os.path.relpath(path,root_path)
-    data = {'content': '', 'info': {'Encoding': 'UTF-8'}}
+    data = {'content': '', 'info': {'Encoding': 'UTF-8-SIG'}}
     try:
         with open(path, 'r', encoding='utf-8-sig') as f:
             data['content'] = f.read()

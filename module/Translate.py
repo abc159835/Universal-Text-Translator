@@ -160,6 +160,7 @@ def start_callback(self: Task):
         strs = preTranslate(self.args[0])
     else:
         strs = self.args[0]
+    
     mytextParser = copy.deepcopy(textParser)
     strs = mytextParser.fix_before(strs)
     self.textparser = mytextParser
@@ -169,6 +170,9 @@ def start_callback(self: Task):
 
 def _create_translate_task(name, strs: list[str], useTrans = True):
     from module.OShelper import put_message
+
+    # 使用dict.fromkeys()保持顺序地去重
+    strs = list(dict.fromkeys(strs))
     
     if useTrans:
         strs = preTranslate(strs)
@@ -238,6 +242,9 @@ def get_translator(translate_func):
                 self.info = line
 
                 _line = next(Generator)
+
+                print(line + ' --> ' + _line)
+                
                 res[line] = _line
 
                 # 前进度加 1
